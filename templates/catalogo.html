@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+{% include "_partials/head.html" %}
+</head>
+<body>
+
+<main class="relative bg-background text-foreground min-h-screen">
+  <div class="container-trail pt-10 flex items-center justify-between">
+    <a href="/" class="text-[10px] tracking-mark text-foreground/60 hover:text-amber transition-colors">
+      ← Voltar à trilha
+    </a>
+    <span class="text-[10px] tracking-mark text-foreground/40">Biblioteca</span>
+  </div>
+
+  <section class="container-trail pt-20 md:pt-28 pb-16 md:pb-24 border-b border-border">
+    <p class="eyebrow mb-6">Biblioteca</p>
+    <h1 class="font-display text-5xl md:text-7xl lg:text-8xl leading-[0.98] max-w-5xl">
+      A trilha inteira, <span class="italic text-amber">passo a passo.</span>
+    </h1>
+    <div class="mt-12 grid grid-cols-12 gap-y-10 gap-x-12">
+      <p class="col-span-12 md:col-span-7 text-lg md:text-xl text-foreground/75 leading-relaxed max-w-2xl">
+        Não foram pensados em uma escrivaninha. Foram pensados em cumeeiras,
+        fogueiras e madrugadas frias. São anotações de quem recomeçou — e
+        decidiu deixar o caminho registrado para quem vem atrás.
+      </p>
+      <div class="col-span-12 md:col-span-5 md:pl-8 md:border-l border-border">
+        <p class="text-[10px] tracking-mark text-foreground/50 mb-3">como ler</p>
+        <p class="text-sm text-foreground/70 leading-relaxed">
+          Comece pelo manifesto <em class="text-amber not-italic">Sua Própria Trilha</em>.
+          Depois siga a ordem que pedir o seu momento — recomeço, disciplina,
+          identidade ou liberdade.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-trail py-20 md:py-28">
+    <div class="flex items-end justify-between mb-14">
+      <h2 class="font-display text-2xl md:text-3xl">Catálogo completo</h2>
+      <span class="text-[10px] tracking-mark text-foreground/50">toque numa capa para ler mais</span>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-16">
+      {% for book in books %}
+      <a href="/livros/{{ book.slug }}/" class="group block">
+        <div class="relative aspect-[3/4] overflow-hidden bg-card/40">
+          <picture>
+            <source srcset="{{ book.cover_image.replace('.jpg', '.webp') }}" type="image/webp">
+            <img src="{{ book.cover_image }}" alt="{{ book.cover_alt }}" loading="lazy"
+                 class="h-full w-full object-cover transition-all duration-[1400ms] group-hover:scale-105"
+                 style="box-shadow:0 30px 60px -30px rgba(0,0,0,0.8)">
+          </picture>
+          <div class="grain-overlay opacity-30"></div>
+        </div>
+        <div class="mt-5 flex items-baseline gap-3">
+          <span class="font-display italic text-amber text-sm">{{ "%02d"|format(book.order) }}</span>
+          {% if book.cover_subtitle %}
+          <span class="text-[10px] tracking-mark text-foreground/50">{{ book.cover_subtitle }}</span>
+          {% endif %}
+        </div>
+        <h3 class="mt-2 font-display text-xl leading-snug group-hover:text-amber transition-colors">
+          {{ book.title }}
+        </h3>
+        {% if book.tagline %}
+        <p class="mt-2 text-sm text-foreground/60 italic leading-snug">
+          {{ book.tagline }}
+        </p>
+        {% endif %}
+        <span class="mt-4 inline-block text-[10px] tracking-mark text-foreground/55 group-hover:text-amber transition-colors">
+          ver detalhes →
+        </span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="container-trail pb-24 md:pb-32">
+    <div class="border-t border-border pt-12 max-w-2xl">
+      <p class="eyebrow mb-4">Próximo capítulo</p>
+      <p class="font-display text-xl md:text-2xl leading-snug text-foreground/85">
+        A biblioteca cresce com a trilha. Novos volumes nascem das fogueiras —
+        e chegam primeiro para quem já caminha.
+      </p>
+    </div>
+  </section>
+</main>
+
+</body>
+</html>

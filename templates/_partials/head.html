@@ -1,0 +1,46 @@
+{# Partial: <head> compartilhado.
+   Variáveis esperadas: page_title, meta_description, og_image #}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A1218">
+{# Bloqueio total de SEO enquanto o site está em construção.
+   Remover esta linha quando o site for lançado publicamente. #}
+<meta name="robots" content="noindex, nofollow">
+<title>{{ page_title }}</title>
+<meta name="description" content="{{ meta_description }}">
+<meta property="og:title" content="{{ og_title or page_title }}">
+<meta property="og:description" content="{{ og_description or meta_description }}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="{{ og_image or '/ebooks-cover.jpg' }}">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/png" href="/assets/inline/favicon.png">
+
+{# Fontes Google: pesos reduzidos pro estritamente usado. Antes: 11 pesos. Agora: 5. #}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Manrope:wght@300;500&family=Caveat&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          background: 'oklch(0.18 0.018 230)',
+          foreground: 'oklch(0.92 0.022 85)',
+          amber:      'oklch(0.82 0.13 78)',
+          moss:       'oklch(0.55 0.06 155)',
+          card:       'oklch(0.21 0.018 230)',
+          border:     'oklch(0.92 0.022 85 / 9%)',
+        },
+        fontFamily: {
+          display: ['Fraunces', 'serif'],
+          sans:    ['Manrope', 'sans-serif'],
+          script:  ['Caveat', 'cursive'],
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="/assets/styles.css">
