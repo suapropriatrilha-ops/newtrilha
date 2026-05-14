@@ -1,0 +1,15 @@
+# Sua Própria Trilha — robots.txt
+# Site em fase de construção. Bloqueio total de indexação até o lançamento.
+
+User-agent: *
+Disallow: /preview.html
+Disallow: /manifesto/
+Disallow: /livros/
+Disallow: /ebooks/
+Disallow: /404.html
+
+# Permite só a raiz (página "em breve")
+Allow: /$
+
+# Sitemap será publicado quando o site real estiver no ar
+# Sitemap: https://suapropriatrilha.com/sitemap.xml
