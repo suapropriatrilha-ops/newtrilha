@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A1218">
+<title>Trilha perdida · 404</title>
+<meta name="description" content="A página que você procura saiu do mapa. Volte para a trilha principal.">
+<meta name="robots" content="noindex">
+
+<link rel="icon" type="image/png" href="/assets/inline/favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Manrope:wght@300;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: {
+        background: 'oklch(0.18 0.018 230)',
+        foreground: 'oklch(0.92 0.022 85)',
+        amber:      'oklch(0.82 0.13 78)',
+        border:     'oklch(0.92 0.022 85 / 9%)',
+      },
+      fontFamily: {
+        display: ['Fraunces', 'serif'],
+        sans:    ['Manrope', 'sans-serif'],
+      }
+    }}
+  }
+</script>
+<link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+
+<main class="bg-background text-foreground min-h-screen flex items-center justify-center">
+  <div class="container-trail text-center max-w-xl">
+    <p class="eyebrow mb-8">404 · Trilha perdida</p>
+    <h1 class="font-display text-5xl md:text-7xl leading-[1.05]">
+      Saiu <span class="italic text-amber">do mapa.</span>
+    </h1>
+    <p class="mt-8 text-base md:text-lg text-foreground/70 leading-relaxed max-w-md mx-auto">
+      A página que você procurava não existe — ou mudou de caminho.
+      Toda boa trilha tem desvios. Volte e siga em frente.
+    </p>
+    <div class="mt-12 flex flex-wrap items-center justify-center gap-4">
+      <a href="/" class="btn-amber">Voltar ao início</a>
+      <a href="/livros/" class="btn-ghost">Ver a biblioteca</a>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>
