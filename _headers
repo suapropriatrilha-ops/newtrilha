@@ -1,0 +1,30 @@
+# Netlify _headers — cache estratégico + segurança
+# (Cloudflare Pages também aceita este formato)
+
+# Assets imutáveis (com hash no nome seria ideal — por enquanto, cache curto-médio)
+/assets/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+  X-Content-Type-Options: nosniff
+
+# Imagens inline extraídas
+/assets/inline/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+# WebP — mesmo cache que JPG/PNG
+/assets/*.webp
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+# HTML — cache curto pra propagar mudanças rápido
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# ATENÇÃO: os PDFs estão publicamente acessíveis em /ebooks/.
+# Em produção, considere movê-los para um bucket privado com link assinado
+# após confirmação de pagamento via webhook do Mercado Pago.
+/ebooks/*
+  Cache-Control: private, max-age=3600
+  X-Robots-Tag: noindex
