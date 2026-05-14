@@ -1,0 +1,500 @@
+{
+  "site": {
+    "title": "Sua Própria Trilha",
+    "tagline": "Um lugar para respirar, refletir e reconstruir.",
+    "domain": "suapropriatrilha.com",
+    "author": "Wexley Servilieri",
+    "default_price": "R$ 37",
+    "default_installments": "ou 4x de R$ 9,99"
+  },
+  "books": [
+    {
+      "slug": "sua-propria-trilha",
+      "page_title": "Sua Própria Trilha · E-book · Sua Própria Trilha",
+      "meta_description": "A montanha interior — o manifesto que deu nome ao movimento.",
+      "title": "Sua Própria Trilha",
+      "eyebrow": "E-book · Sua Própria Trilha",
+      "tagline": "A montanha interior — o manifesto que deu nome ao movimento.",
+      "cover_image": "/assets/book-1.jpg",
+      "cover_alt": "Capa: Sua Própria Trilha",
+      "cover_subtitle": "Manifesto · A Montanha Interior",
+      "description_paragraphs": [
+        "Um manifesto sobre recomeço, disciplina e a coragem de caminhar a própria rota.",
+        "Para quem está cansado de seguir o mapa dos outros e quer desenhar o próprio."
+      ],
+      "price": "R$ 37",
+      "installments": "ou 4x de R$ 9,99",
+      "mp_link": "",
+      "_legacy_mailto": "mailto:contato@suapropriatrilha.com?subject=Compra: Sua Própria Trilha",
+      "pdf_sample": "/ebooks/sua-propria-trilha.pdf",
+      "format": "PDF",
+      "pages": "—",
+      "access": "Vitalício",
+      "author": "Wexley Servilieri",
+      "target_audience": [
+        "Quem sente que está vivendo um roteiro escrito por outra pessoa.",
+        "Quem precisa recomeçar sem saber por onde.",
+        "Quem quer um manifesto curto, denso e relido várias vezes."
+      ],
+      "whats_included": [
+        "O manifesto completo em PDF.",
+        "Os 7 princípios da Trilha Própria.",
+        "Atualizações gratuitas das próximas edições."
+      ],
+      "guarantee_title": "7 dias para ler, sentir e decidir.",
+      "guarantee_description": "Se o livro não te mover de onde você está, devolvemos 100% do\n        valor — sem perguntas, sem ressentimento.",
+      "next_slug": "o-primeiro-passo-e-acreditar",
+      "next_title": "O Primeiro Passo é Acreditar",
+      "order": 1
+    },
+    {
+      "slug": "o-primeiro-passo-e-acreditar",
+      "page_title": "O Primeiro Passo é Acreditar · E-book · Sua Própria Trilha",
+      "meta_description": "Antes da rota, a fé no próximo passo.",
+      "title": "O Primeiro Passo é Acreditar",
+      "eyebrow": "E-book · Sua Própria Trilha",
+      "tagline": "Antes da rota, a fé no próximo passo.",
+      "cover_image": "/assets/book-2.jpg",
+      "cover_alt": "Capa: O Primeiro Passo é Acreditar",
+      "cover_subtitle": "Sua Própria Trilha · Volume I",
+      "description_paragraphs": [
+        "Sobre o instante em que tudo parece travado e mesmo assim você decide andar.",
+        "Um guia honesto para quem precisa recomeçar sem garantias — primeiro volume da trilogia."
+      ],
+      "price": "R$ 27",
+      "installments": "ou 3x de R$ 9,99",
+      "mp_link": "",
+      "_legacy_mailto": "mailto:contato@suapropriatrilha.com?subject=Compra: O Primeiro Passo é Acreditar",
+      "pdf_sample": "/ebooks/o-primeiro-passo-e-acreditar.pdf",
+      "format": "PDF",
+      "pages": "—",
+      "access": "Vitalício",
+      "author": "Wexley Servilieri",
+      "target_audience": [
+        "Quem está paralisado entre a vida que quer e a vida que tem.",
+        "Quem precisa de coragem antes de precisar de plano."
+      ],
+      "whats_included": [
+        "Volume I da trilogia em PDF.",
+        "Exercícios práticos de decisão para o primeiro passo."
+      ],
+      "guarantee_title": "7 dias para ler, sentir e decidir.",
+      "guarantee_description": "Se o livro não te mover de onde você está, devolvemos 100% do\n        valor — sem perguntas, sem ressentimento.",
+      "next_slug": "de-onde-a-trilha-me-levar",
+      "next_title": "De onde a Trilha me Levar",
+      "order": 2
+    },
+    {
+      "slug": "de-onde-a-trilha-me-levar",
+      "page_title": "De onde a Trilha me Levar · E-book · Sua Própria Trilha",
+      "meta_description": "A jornada de quem decidiu assumir o próprio caminho.",
+      "title": "De onde a Trilha me Levar",
+      "eyebrow": "E-book · Sua Própria Trilha",
+      "tagline": "A jornada de quem decidiu assumir o próprio caminho.",
+      "cover_image": "/assets/book-3.jpg",
+      "cover_alt": "Capa: De onde a Trilha me Levar",
+      "cover_subtitle": "Crônicas · Sua Própria Trilha",
+      "description_paragraphs": [
+        "Crônicas de estrada, montanha e silêncio — histórias curtas escritas no meio do caminho.",
+        "Para ler num gole ou em meses. Um diário de quem aprendeu a confiar no que ainda não vê."
+      ],
+      "price": "R$ 27",
+      "installments": "ou 3x de R$ 9,99",
+      "mp_link": "",
+      "_legacy_mailto": "mailto:contato@suapropriatrilha.com?subject=Compra: De onde a Trilha me Levar",
+      "pdf_sample": "/ebooks/de-onde-a-trilha-me-levar.pdf",
+      "format": "PDF",
+      "pages": "—",
+      "access": "Vitalício",
+      "author": "Wexley Servilieri",
+      "target_audience": [
+        "Quem gosta de ler em capítulos curtos, antes de dormir ou no café.",
+        "Quem busca companhia em forma de palavra durante uma travessia pessoal."
+      ],
+      "whats_included": [
+        "Coletânea completa de crônicas em PDF.",
+        "Reflexões para acompanhar cada texto."
+      ],
+      "guarantee_title": "7 dias para ler, sentir e decidir.",
+      "guarantee_description": "Se o livro não te mover de onde você está, devolvemos 100% do\n        valor — sem perguntas, sem ressentimento.",
+      "next_slug": "onde-a-noite-me-levou",
+      "next_title": "Onde a Noite me Levou",
+      "order": 3
+    },
+    {
+      "slug": "onde-a-noite-me-levou",
+      "page_title": "Onde a Noite me Levou · E-book · Sua Própria Trilha",
+      "meta_description": "Preparação e jornada ao Pico do Papagaio no inverno.",
+      "title": "Onde a Noite me Levou",
+      "eyebrow": "E-book · Sua Própria Trilha",
+      "tagline": "Preparação e jornada ao Pico do Papagaio no inverno.",
+      "cover_image": "/assets/book-4.jpg",
+      "cover_alt": "Capa: Onde a Noite me Levou",
+      "cover_subtitle": "Pico do Papagaio · Inverno",
+      "description_paragraphs": [
+        "Diário de uma travessia real: o frio, o medo, a logística e o silêncio entre o acampamento e o cume.",
+        "Para quem sente que a noite está longa e precisa lembrar que ela passa — e que se atravessa caminhando."
+      ],
+      "price": "R$ 27",
+      "installments": "ou 3x de R$ 9,99",
+      "mp_link": "",
+      "_legacy_mailto": "mailto:contato@suapropriatrilha.com?subject=Compra: Onde a Noite me Levou",
+      "pdf_sample": "/ebooks/onde-a-noite-me-levou.pdf",
+      "format": "PDF",
+      "pages": "—",
+      "access": "Vitalício",
+      "author": "Wex Servilieri",
+      "target_audience": [
+        "Quem está atravessando uma fase escura e precisa de um relato honesto.",
+        "Quem ama montanhismo e quer ler uma travessia de dentro pra fora."
+      ],
+      "whats_included": [
+        "Diário completo da expedição em PDF.",
+        "Notas de preparação física e mental para travessias reais."
+      ],
+      "guarantee_title": "7 dias para ler, sentir e decidir.",
+      "guarantee_description": "Se o livro não te mover de onde você está, devolvemos 100% do\n        valor — sem perguntas, sem ressentimento.",
+      "next_slug": "o-livro-para-quem-odeia-livros",
+      "next_title": "O Livro para Quem Odeia Livros",
+      "order": 4
+    },
+    {
+      "slug": "o-livro-para-quem-odeia-livros",
+      "page_title": "O Livro para Quem Odeia Livros · E-book · Sua Própria Trilha",
+      "meta_description": "30 dias de guerrilha contra o cérebro de geleia.",
+      "title": "O Livro para Quem Odeia Livros",
+      "eyebrow": "E-book · Sua Própria Trilha",
+      "tagline": "30 dias de guerrilha contra o cérebro de geleia.",
+      "cover_image": "/assets/book-5.jpg",
+      "cover_alt": "Capa: O Livro para Quem Odeia Livros",
+      "cover_subtitle": "30 dias · Guerrilha mental",
+      "description_paragraphs": [
+        "Um treinamento de guerrilha digital em micro-doses literárias: 2 minutos por dia, sarcasmo de segurança e progressão real para reabilitar o seu foco.",
+        "Para quem diz que não tem tempo (mas gasta duas horas no Reels), sente sono só de abrir um livro e quer voltar a ter opinião própria — não ditada por um algoritmo de 15 segundos.",
+        "Em 30 dias você atravessa três fases: o choque de realidade, a reabilitação cognitiva e o nascimento do leitor. Risco real: virar uma pessoa mais interessante."
+      ],
+      "price": "R$ 47",
+      "installments": "ou 5x de R$ 9,99",
+      "mp_link": "",
+      "_legacy_mailto": "mailto:contato@suapropriatrilha.com?subject=Compra: O Livro para Quem Odeia Livros",
+      "pdf_sample": "/ebooks/o-livro-para-quem-odeia-livros.pdf",
+      "format": "PDF",
+      "pages": "30 capítulos · ~80 páginas",
+      "access": "Vitalício",
+      "author": "Wexley Servilieri",
+      "target_audience": [
+        "Quem perdeu o foco depois de 5 anos de scroll infinito.",
+        "Quem nunca terminou um livro inteiro e quer mudar isso em 30 dias.",
+        "Quem quer voltar a pensar sem precisar de legenda em vídeo."
+      ],
+      "whats_included": [
+        "30 capítulos curtos (2 minutos cada) em PDF.",
+        "Plano de leitura diário com progressão de dificuldade.",
+        "As 3 fases: choque, reabilitação e nascimento do leitor."
+      ],
+      "guarantee_title": "7 dias para ler, sentir e decidir.",
+      "guarantee_description": "Se o livro não te mover de onde você está, devolvemos 100% do\n        valor — sem perguntas, sem ressentimento.",
+      "next_slug": "a-ilusao-do-amanha",
+      "next_title": "A ilusão do amanhã",
+      "order": 5
+    },
+    {
+      "slug": "a-ilusao-do-amanha",
+      "page_title": "A ilusão do amanhã · E-book · Sua Própria Trilha",
+      "meta_description": "Hoje é o único dia que existe.",
+      "title": "A ilusão do amanhã",
+      "eyebrow": "E-book · Sua Própria Trilha",
+      "tagline": "Hoje é o único dia que existe.",
+      "cover_image": "/assets/book-6.jpg",
+      "cover_alt": "Capa: A ilusão do amanhã",
+      "cover_subtitle": "Disciplina",
+      "description_paragraphs": [
+        "Sobre a armadilha de empurrar a vida para um amanhã que nunca chega.",
+        "Um chamado prático à disciplina sem precisar de motivação externa."
+      ],
+      "price": "R$ 19",
+      "installments": "",
+      "mp_link": "",
+      "_legacy_mailto": "mailto:contato@suapropriatrilha.com?subject=Compra: A ilusão do amanhã",
+      "pdf_sample": "/ebooks/proposito-nao-se-mede-se-vive.pdf",
+      "format": "PDF",
+      "pages": "—",
+      "access": "Vitalício",
+      "author": "Wexley Servilieri",
+      "target_audience": [
+        "Quem vive adiando o que importa para uma segunda-feira que não chega.",
+        "Quem quer disciplina sem depender de motivação."
+      ],
+      "whats_included": [
+        "Ensaio completo em PDF.",
+        "Provocações práticas para começar hoje."
+      ],
+      "guarantee_title": "7 dias para ler, sentir e decidir.",
+      "guarantee_description": "Se o livro não te mover de onde você está, devolvemos 100% do\n        valor — sem perguntas, sem ressentimento.",
+      "next_slug": "a-arquitetura-da-alma",
+      "next_title": "A Arquitetura da Alma",
+      "order": 6
+    },
+    {
+      "slug": "a-arquitetura-da-alma",
+      "page_title": "A Arquitetura da Alma · E-book · Sua Própria Trilha",
+      "meta_description": "O que você constrói por dentro sustenta tudo lá fora.",
+      "title": "A Arquitetura da Alma",
+      "eyebrow": "E-book · Sua Própria Trilha",
+      "tagline": "O que você constrói por dentro sustenta tudo lá fora.",
+      "cover_image": "/assets/book-7.jpg",
+      "cover_alt": "Capa: A Arquitetura da Alma",
+      "cover_subtitle": "Filosofia · Sua Própria Trilha",
+      "description_paragraphs": [
+        "Reflexões sobre quem somos quando ninguém está olhando — mente, coração e estrutura interior.",
+        "Uma travessia filosófica entre identidade, propósito e silêncio."
+      ],
+      "price": "R$ 27",
+      "installments": "ou 3x de R$ 9,99",
+      "mp_link": "",
+      "_legacy_mailto": "mailto:contato@suapropriatrilha.com?subject=Compra: A Arquitetura da Alma",
+      "pdf_sample": "/ebooks/a-arquitetura-da-alma.pdf",
+      "format": "PDF",
+      "pages": "—",
+      "access": "Vitalício",
+      "author": "Wexley Servilieri",
+      "target_audience": [
+        "Quem busca construir solidez interior antes de buscar resultado externo.",
+        "Quem gosta de leitura filosófica aplicada à vida real."
+      ],
+      "whats_included": [
+        "Ensaio completo em PDF.",
+        "Mapa dos pilares interiores apresentados no livro."
+      ],
+      "guarantee_title": "7 dias para ler, sentir e decidir.",
+      "guarantee_description": "Se o livro não te mover de onde você está, devolvemos 100% do\n        valor — sem perguntas, sem ressentimento.",
+      "next_slug": "a-arte-de-recomecar-com-ouro",
+      "next_title": "A Arte de Recomeçar com Ouro",
+      "order": 7
+    },
+    {
+      "slug": "a-arte-de-recomecar-com-ouro",
+      "page_title": "A Arte de Recomeçar com Ouro · E-book · Sua Própria Trilha",
+      "meta_description": "Transformando feridas em sabedoria, cicatrizes em beleza.",
+      "title": "A Arte de Recomeçar com Ouro",
+      "eyebrow": "E-book · Sua Própria Trilha",
+      "tagline": "Transformando feridas em sabedoria, cicatrizes em beleza.",
+      "cover_image": "/assets/book-8.jpg",
+      "cover_alt": "Capa: A Arte de Recomeçar com Ouro",
+      "cover_subtitle": "Kintsugi · Reconstrução",
+      "description_paragraphs": [
+        "Inspirado no kintsugi japonês: o que quebra também brilha. Reconstruir sem esconder a marca.",
+        "Para quem precisa reaprender a se montar inteiro — com ouro nas rachaduras, não vergonha."
+      ],
+      "price": "R$ 27",
+      "installments": "ou 3x de R$ 9,99",
+      "mp_link": "",
+      "_legacy_mailto": "mailto:contato@suapropriatrilha.com?subject=Compra: A Arte de Recomeçar com Ouro",
+      "pdf_sample": "/ebooks/a-arte-de-recomecar-com-ouro.pdf",
+      "format": "PDF",
+      "pages": "—",
+      "access": "Vitalício",
+      "author": "Wexley Servilieri",
+      "target_audience": [
+        "Quem está saindo de uma perda, ruptura ou queda recente.",
+        "Quem quer parar de esconder cicatriz e começar a integrá-la."
+      ],
+      "whats_included": [
+        "Livro completo em PDF.",
+        "7 passos do método kintsugi pessoal."
+      ],
+      "guarantee_title": "7 dias para ler, sentir e decidir.",
+      "guarantee_description": "Se o livro não te mover de onde você está, devolvemos 100% do\n        valor — sem perguntas, sem ressentimento.",
+      "next_slug": "quando-voce-se-torna-a-sua-propria-paisagem",
+      "next_title": "Quando Você se Torna a Sua Própria Paisagem",
+      "order": 8
+    },
+    {
+      "slug": "quando-voce-se-torna-a-sua-propria-paisagem",
+      "page_title": "Quando Você se Torna a Sua Própria Paisagem · E-book · Sua Própria Trilha",
+      "meta_description": "Você é o lugar que estava procurando.",
+      "title": "Quando Você se Torna a Sua Própria Paisagem",
+      "eyebrow": "E-book · Sua Própria Trilha",
+      "tagline": "Você é o lugar que estava procurando.",
+      "cover_image": "/assets/book-9.jpg",
+      "cover_alt": "Capa: Quando Você se Torna a Sua Própria Paisagem",
+      "cover_subtitle": "Identidade · Sua Própria Trilha",
+      "description_paragraphs": [
+        "Um convite a parar de procurar fora o que só nasce dentro — e perceber que o caminho desenha você no mesmo gesto em que você desenha o caminho.",
+        "Sobre se tornar a casa que você queria encontrar."
+      ],
+      "price": "R$ 27",
+      "installments": "ou 3x de R$ 9,99",
+      "mp_link": "",
+      "_legacy_mailto": "mailto:contato@suapropriatrilha.com?subject=Compra: Quando Você se Torna a Sua Própria Paisagem",
+      "pdf_sample": "/ebooks/quando-voce-se-torna-a-sua-propria-paisagem.pdf",
+      "format": "PDF",
+      "pages": "—",
+      "access": "Vitalício",
+      "author": "Wexley Servilieri",
+      "target_audience": [
+        "Quem cansou de procurar lá fora um sentido que só nasce por dentro.",
+        "Quem quer se enxergar como destino, não como ponto de partida."
+      ],
+      "whats_included": [
+        "Ensaio completo em PDF.",
+        "Exercícios de reconhecimento de identidade."
+      ],
+      "guarantee_title": "7 dias para ler, sentir e decidir.",
+      "guarantee_description": "Se o livro não te mover de onde você está, devolvemos 100% do\n        valor — sem perguntas, sem ressentimento.",
+      "next_slug": "o-peso-invisivel-da-bagagem",
+      "next_title": "O Peso Invisível da Bagagem",
+      "order": 9
+    },
+    {
+      "slug": "o-peso-invisivel-da-bagagem",
+      "page_title": "O Peso Invisível da Bagagem · E-book · Sua Própria Trilha",
+      "meta_description": "O que você ainda carrega sem perceber.",
+      "title": "O Peso Invisível da Bagagem",
+      "eyebrow": "E-book · Sua Própria Trilha",
+      "tagline": "O que você ainda carrega sem perceber.",
+      "cover_image": "/assets/book-10.jpg",
+      "cover_alt": "Capa: O Peso Invisível da Bagagem",
+      "cover_subtitle": "Soltar · e-book",
+      "description_paragraphs": [
+        "Sobre o peso silencioso das mágoas, papéis e expectativas que viram rotina.",
+        "Um exercício de escolher o que continua na mochila daqui pra frente."
+      ],
+      "price": "R$ 19",
+      "installments": "",
+      "mp_link": "",
+      "_legacy_mailto": "mailto:contato@suapropriatrilha.com?subject=Compra: O Peso Invisível da Bagagem",
+      "pdf_sample": "/ebooks/o-peso-invisivel-da-bagagem.pdf",
+      "format": "PDF",
+      "pages": "—",
+      "access": "Vitalício",
+      "author": "Wexley Servilieri",
+      "target_audience": [
+        "Quem sente que carrega coisas demais sem saber o quê.",
+        "Quem precisa de um exercício prático para soltar."
+      ],
+      "whats_included": [
+        "Livro completo em PDF.",
+        "Roteiro de inventário pessoal: o que fica e o que sai."
+      ],
+      "guarantee_title": "7 dias para ler, sentir e decidir.",
+      "guarantee_description": "Se o livro não te mover de onde você está, devolvemos 100% do\n        valor — sem perguntas, sem ressentimento.",
+      "next_slug": "quem-escolhe-a-sua-trilha",
+      "next_title": "Quem Escolhe Suas Trilhas Cria o Próprio Destino",
+      "order": 10
+    },
+    {
+      "slug": "quem-escolhe-a-sua-trilha",
+      "page_title": "Quem Escolhe Suas Trilhas Cria o Próprio Destino · E-book · Sua Própria Trilha",
+      "meta_description": "Cada passo consciente é um mapa do seu destino.",
+      "title": "Quem Escolhe Suas Trilhas Cria o Próprio Destino",
+      "eyebrow": "E-book · Sua Própria Trilha",
+      "tagline": "Cada passo consciente é um mapa do seu destino.",
+      "cover_image": "/assets/book-11.jpg",
+      "cover_alt": "Capa: Quem Escolhe Suas Trilhas Cria o Próprio Destino",
+      "cover_subtitle": "Com vídeo exclusivo · Pedra do Baú",
+      "description_paragraphs": [
+        "A pergunta mais honesta que um adulto pode fazer a si mesmo: quem está, de fato, escolhendo o seu caminho?",
+        "Sobre liberdade, responsabilidade e parar de delegar a própria vida — acompanhado de um vídeo exclusivo subindo a Pedra do Baú."
+      ],
+      "price": "R$ 57",
+      "installments": "ou 6x de R$ 9,99 · inclui vídeo exclusivo",
+      "mp_link": "",
+      "_legacy_mailto": "mailto:contato@suapropriatrilha.com?subject=Compra: Quem Escolhe Suas Trilhas Cria o Próprio Destino",
+      "pdf_sample": "/ebooks/quem-escolhe-a-sua-trilha.pdf",
+      "format": "PDF + Vídeo",
+      "pages": "—",
+      "access": "Vitalício",
+      "author": "Wexley Servilieri",
+      "target_audience": [
+        "Quem sente que está terceirizando as decisões da própria vida.",
+        "Quem quer um livro + uma experiência visual real de subida."
+      ],
+      "whats_included": [
+        "Livro completo em PDF.",
+        "Vídeo exclusivo da subida à Pedra do Baú.",
+        "Acesso vitalício às reedições."
+      ],
+      "guarantee_title": "7 dias para ler, sentir e decidir.",
+      "guarantee_description": "Se o livro não te mover de onde você está, devolvemos 100% do\n        valor — sem perguntas, sem ressentimento.",
+      "next_slug": "minimalismo-digital",
+      "next_title": "Minimalismo Digital",
+      "order": 11
+    },
+    {
+      "slug": "minimalismo-digital",
+      "page_title": "Minimalismo Digital · E-book · Sua Própria Trilha",
+      "meta_description": "Organize sua vida online e recupere o foco.",
+      "title": "Minimalismo Digital",
+      "eyebrow": "E-book · Sua Própria Trilha",
+      "tagline": "Organize sua vida online e recupere o foco.",
+      "cover_image": "/assets/book-12.jpg",
+      "cover_alt": "Capa: Minimalismo Digital",
+      "cover_subtitle": "Foco · Detox de tela",
+      "description_paragraphs": [
+        "Um guia prático para reduzir o ruído digital, simplificar apps, notificações e rotinas — e devolver à sua mente o silêncio que ela perdeu.",
+        "Para quem quer parar de reagir e voltar a escolher o que merece atenção."
+      ],
+      "price": "R$ 27",
+      "installments": "ou 3x de R$ 9,99",
+      "mp_link": "",
+      "_legacy_mailto": "mailto:contato@suapropriatrilha.com?subject=Compra: Minimalismo Digital",
+      "pdf_sample": "/ebooks/minimalismo-digital.pdf",
+      "format": "PDF",
+      "pages": "—",
+      "access": "Vitalício",
+      "author": "Wexley Servilieri",
+      "target_audience": [
+        "Quem desbloqueia o celular sem motivo dezenas de vezes por dia.",
+        "Quem quer um plano direto pra reduzir apps, notificações e ruído."
+      ],
+      "whats_included": [
+        "Guia prático em PDF.",
+        "Checklist de detox digital em 7 dias.",
+        "Modelo de rotina pós-detox."
+      ],
+      "guarantee_title": "7 dias para ler, sentir e decidir.",
+      "guarantee_description": "Se o livro não te mover de onde você está, devolvemos 100% do\n        valor — sem perguntas, sem ressentimento.",
+      "next_slug": "proposito-nao-se-mede-se-vive",
+      "next_title": "Propósito não se mede, se vive",
+      "order": 12
+    },
+    {
+      "slug": "proposito-nao-se-mede-se-vive",
+      "page_title": "Propósito não se mede, se vive · E-book · Sua Própria Trilha",
+      "meta_description": "Propósito não cabe em planilha — cabe em passo dado.",
+      "title": "Propósito não se mede, se vive",
+      "eyebrow": "E-book · Sua Própria Trilha",
+      "tagline": "Propósito não cabe em planilha — cabe em passo dado.",
+      "cover_image": "/assets/book-13.jpg",
+      "cover_alt": "Capa: Propósito não se mede, se vive",
+      "cover_subtitle": "Sentido · Sua Própria Trilha",
+      "description_paragraphs": [
+        "Um manifesto contra a obsessão por métricas e produtividade — e a favor de uma vida medida pelo que se atravessa, não pelo que se acumula.",
+        "Para quem cansou de planejar a vida e quer começar a viver a sua."
+      ],
+      "price": "R$ 27",
+      "installments": "ou 3x de R$ 9,99",
+      "mp_link": "",
+      "_legacy_mailto": "mailto:contato@suapropriatrilha.com?subject=Compra: Propósito não se mede, se vive",
+      "pdf_sample": "/ebooks/proposito-nao-se-mede-se-vive.pdf",
+      "format": "PDF",
+      "pages": "—",
+      "access": "Vitalício",
+      "author": "Wexley Servilieri",
+      "target_audience": [
+        "Quem confundiu produtividade com propósito.",
+        "Quem quer viver mais e medir menos."
+      ],
+      "whats_included": [
+        "Manifesto completo em PDF.",
+        "Quadro de bordo de uma vida medida pelo que se vive."
+      ],
+      "guarantee_title": "7 dias para ler, sentir e decidir.",
+      "guarantee_description": "Se o livro não te mover de onde você está, devolvemos 100% do\n        valor — sem perguntas, sem ressentimento.",
+      "next_slug": "sua-propria-trilha",
+      "next_title": "Sua Própria Trilha",
+      "order": 13
+    }
+  ]
+}
