@@ -193,9 +193,68 @@
   .sig{margin-top:34px;font-family:'Hanken Grotesk',sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#9C8E76}
 
   .hr{height:1px;background:var(--line);max-width:760px;margin:0 auto}
+
+  /* ---- MENU INICIAL (nav do site) ---- */
+  .snav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid transparent;transition:background .3s,backdrop-filter .3s,border-color .3s,padding .3s}
+  .snav.scrolled{background:rgba(247,243,236,.86);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);border-bottom-color:var(--line);padding-top:12px;padding-bottom:12px}
+  .snav__brand{display:flex;align-items:center;gap:12px}
+  .snav__logo{width:38px;height:38px;object-fit:contain;display:block;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
+  .snav__name{font-family:'Fraunces',serif;font-style:italic;font-size:17px;line-height:1;color:#F4ECDE;transition:color .3s}
+  .snav.scrolled .snav__name{color:var(--ink)}
+  .snav__menu{display:flex;align-items:center;gap:28px}
+  .snav__link{font-family:'Hanken Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,236,222,.74);transition:color .25s;position:relative}
+  .snav.scrolled .snav__link{color:var(--muted)}
+  .snav__link:hover{color:#F4ECDE}
+  .snav.scrolled .snav__link:hover{color:var(--ink)}
+  .snav__link.active{color:#E9B97E}
+  .snav.scrolled .snav__link.active{color:var(--clay)}
+  .snav__link::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--clay);transition:width .3s}
+  .snav__link:hover::after,.snav__link.active::after{width:100%}
+  .snav__cta{font-family:'Hanken Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#F4ECDE;border:1px solid rgba(244,236,222,.4);padding:9px 18px;border-radius:999px;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1;transition:all .25s}
+  .snav.scrolled .snav__cta{color:var(--ink);border-color:var(--line)}
+  .snav__cta small{font-size:8px;font-weight:400;letter-spacing:.18em;opacity:.6}
+  .snav__cta:hover{background:var(--clay);border-color:var(--clay);color:#fff}
+  .snav__burger{display:none;width:26px;height:20px;position:relative;background:none;border:none;cursor:pointer}
+  .snav__burger span{position:absolute;left:0;right:0;height:1.5px;background:#F4ECDE;transition:background .3s}
+  .snav.scrolled .snav__burger span{background:var(--ink)}
+  .snav__burger span:nth-child(1){top:3px}.snav__burger span:nth-child(2){bottom:3px}
+  @media(max-width:860px){.snav__menu,.snav__cta{display:none}.snav__burger{display:block}}
+  .smenu{position:fixed;inset:0;z-index:99;background:rgba(26,22,17,.97);backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;opacity:0;pointer-events:none;transition:opacity .35s}
+  .smenu.open{opacity:1;pointer-events:auto}
+  .smenu a{font-family:'Fraunces',serif;font-style:italic;font-size:30px;color:#F4ECDE}
+  .smenu a.active{color:#E9B97E}
+  .smenu small{font-family:'Hanken Grotesk',sans-serif;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#9C8E76}
 </style>
 </head>
 <body>
+
+<!-- ===================== MENU INICIAL ===================== -->
+<nav class="snav" id="snav">
+  <a class="snav__brand" href="/" aria-label="Sua Própria Trilha">
+    <img class="snav__logo" src="/assets/logo-mark.png" alt="Sua Própria Trilha">
+    <span class="snav__name">Sua Própria Trilha</span>
+  </a>
+  <div class="snav__menu">
+    <a class="snav__link" href="/#manifesto">Manifesto</a>
+    <a class="snav__link" href="/#wex">A história</a>
+    <a class="snav__link active" href="/metodo/">O Método</a>
+    <a class="snav__link" href="/#biblioteca">Biblioteca</a>
+    <a class="snav__link" href="/#videos">Vídeos</a>
+    <a class="snav__link" href="/#explore">Explore</a>
+  </div>
+  <a class="snav__cta" href="/#biblioteca"><span>Biblioteca</span><small>13 livros</small></a>
+  <button class="snav__burger" id="sburger" aria-label="Abrir menu"><span></span><span></span></button>
+</nav>
+<div class="smenu" id="smenu">
+  <small>Menu</small>
+  <a href="/#manifesto">Manifesto</a>
+  <a href="/#wex">A história</a>
+  <a class="active" href="/metodo/">O Método</a>
+  <a href="/#biblioteca">Biblioteca</a>
+  <a href="/#videos">Vídeos</a>
+  <a href="/#explore">Explore</a>
+  <a href="/livros/">Todos os livros</a>
+</div>
 
 <!-- ===================== HERO ===================== -->
 <header class="hero">
@@ -453,6 +512,13 @@
 </section>
 
 <script>
+// menu inicial: estado sólido ao rolar + menu mobile
+const snav=document.getElementById('snav');
+window.addEventListener('scroll',()=>{snav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
+const sburger=document.getElementById('sburger'),smenu=document.getElementById('smenu');
+sburger?.addEventListener('click',()=>smenu.classList.toggle('open'));
+smenu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>smenu.classList.remove('open')));
+
 function tog(head){
   const mov=head.parentElement;
   const open=mov.classList.contains('active');
