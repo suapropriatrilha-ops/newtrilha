@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sua Própria Trilha · O Método Master</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bone:#F4EEE3; --paper:#FBF7EF; --card:#FFFDF8;
+    --ink:#1F1B15; --ink-soft:#4C453A; --muted:#867B6B;
+    --clay:#A8663C; --clay-deep:#7E4524; --clay-soft:#F0E1D2;
+    --sage:#5C6B4D; --sage-deep:#3C4733; --sage-soft:#E7EADD;
+    --line:#E2D9C9; --line-soft:#EDE6D8;
+    --night:#1A1611;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Newsreader',Georgia,serif;
+    background:var(--bone); color:var(--ink);
+    font-size:17px; line-height:1.7; font-weight:300;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
+
+  /* ---- shared type ---- */
+  .eyebrow{font-family:'Hanken Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--clay)}
+  .label{font-family:'Hanken Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--clay)}
+  h2.section-title{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(28px,5vw,40px);line-height:1.1;letter-spacing:-.02em}
+  .ital{font-style:italic}
+  strong{font-weight:600;color:var(--ink)}
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(22px);animation:rise .9s cubic-bezier(.2,.7,.3,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  /* =========== HERO =========== */
+  .hero{
+    position:relative; color:#F4ECDE; overflow:hidden;
+    background:
+      radial-gradient(120% 90% at 50% -10%, rgba(214,138,74,.55) 0%, rgba(168,102,60,.18) 32%, rgba(26,22,17,0) 60%),
+      radial-gradient(140% 120% at 80% 0%, rgba(232,178,108,.28), rgba(26,22,17,0) 45%),
+      linear-gradient(180deg,#241d16 0%, #1A1611 55%, #181410 100%);
+    padding:96px 24px 88px;
+  }
+  .hero::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:38%;
+    background:linear-gradient(180deg, rgba(26,22,17,0), rgba(26,22,17,.6)),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.015) 0 2px, transparent 2px 5px);
+    pointer-events:none;
+  }
+  /* faint ridge line */
+  .ridge{position:absolute;left:0;right:0;bottom:0;width:100%;height:160px;opacity:.5}
+  .hero-inner{max-width:760px;margin:0 auto;position:relative;z-index:2}
+  .hero .eyebrow{color:#E6B879}
+  .kicker{margin:26px 0 18px;font-family:'Hanken Grotesk',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#C8B79C;font-weight:500}
+  .hero h1{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(34px,7vw,58px);line-height:1.04;letter-spacing:-.025em;color:#FBF4E7;
+  }
+  .hero h1 em{font-style:italic;font-weight:400;color:#E9B97E}
+  .hero-sub{margin-top:26px;font-size:clamp(16px,2.3vw,19px);line-height:1.75;color:#D8CBB6;max-width:540px;font-weight:300}
+  .hero-meta{margin-top:40px;display:flex;flex-wrap:wrap;gap:10px 26px}
+  .hero-meta span{font-family:'Hanken Grotesk',sans-serif;font-size:12px;letter-spacing:.04em;color:#B7A88f;display:flex;align-items:center;gap:8px}
+  .hero-meta span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--clay);display:inline-block}
+
+  /* =========== SECTION RHYTHM =========== */
+  section.block{padding:78px 0}
+  .num-eyebrow{display:flex;align-items:baseline;gap:14px;margin-bottom:22px}
+  .num-eyebrow .n{font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--clay)}
+  .lead{font-size:clamp(18px,2.6vw,21px);line-height:1.7;color:var(--ink-soft);font-weight:300;margin-top:20px}
+  .lead em{font-style:italic;color:var(--ink)}
+  .body-p{font-size:17px;line-height:1.75;color:var(--ink-soft);margin-top:18px}
+
+  /* condition / problem */
+  .condition{background:var(--night);color:#E8DECB}
+  .condition .section-title{color:#FBF4E7}
+  .condition .label{color:#E6B879}
+  .condition .lead{color:#CDBFA6}
+  .cond-list{margin-top:34px;display:flex;flex-direction:column}
+  .cond-row{padding:20px 0;border-top:1px solid rgba(255,255,255,.1);display:flex;gap:18px;align-items:flex-start}
+  .cond-row:last-child{border-bottom:1px solid rgba(255,255,255,.1)}
+  .cond-row .ci{font-family:'Fraunces',serif;font-style:italic;color:#C98A4E;font-size:18px;min-width:30px}
+  .cond-row p{font-size:16.5px;color:#D4C7AF;line-height:1.6}
+  .cond-row p b{color:#F4ECDE;font-weight:600}
+  .cond-punch{margin-top:36px;font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:clamp(22px,4vw,30px);line-height:1.3;color:#F0C58A}
+
+  /* origin quote block */
+  .origin{margin-top:8px;border-left:2px solid var(--clay);padding:6px 0 6px 26px;display:flex;flex-direction:column;gap:16px}
+  .origin .label{margin-bottom:4px}
+  .origin q{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:19px;line-height:1.5;color:var(--ink);quotes:none}
+  .origin q::before{content:"“"}.origin q::after{content:"”"}
+
+  /* para quem / não é */
+  .audience{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}
+  .aud-card{border-radius:16px;padding:26px 24px}
+  .aud-yes{background:var(--sage-soft);border:1px solid #D2D9C2}
+  .aud-no{background:var(--clay-soft);border:1px solid #E6D2bf}
+  .aud-card h4{font-family:'Hanken Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
+  .aud-yes h4{color:var(--sage-deep)} .aud-no h4{color:var(--clay-deep)}
+  .aud-card ul{list-style:none;display:flex;flex-direction:column;gap:13px}
+  .aud-card li{font-size:15.5px;line-height:1.55;color:var(--ink-soft);padding-left:22px;position:relative}
+  .aud-yes li::before{content:"↗";position:absolute;left:0;color:var(--sage);font-family:'Hanken Grotesk',sans-serif}
+  .aud-no li::before{content:"·";position:absolute;left:0;color:var(--clay)}
+  @media(max-width:560px){.audience{grid-template-columns:1fr}}
+
+  /* desconexão feature */
+  .gate{background:linear-gradient(180deg,var(--paper),var(--bone));border:1px solid var(--line);border-radius:20px;padding:38px 34px;margin-top:30px;position:relative;overflow:hidden}
+  .gate::before{content:"00";position:absolute;top:-18px;right:18px;font-family:'Fraunces',serif;font-weight:300;font-size:120px;color:var(--line-soft);line-height:1;z-index:0}
+  .gate>*{position:relative;z-index:1}
+  .gate h3{font-family:'Fraunces',serif;font-weight:400;font-size:26px;line-height:1.15;margin:10px 0 14px;letter-spacing:-.01em}
+  .gate p{font-size:16.5px;color:var(--ink-soft);line-height:1.72;margin-bottom:14px}
+  .gate-nat{margin-top:22px;display:flex;flex-direction:column;gap:12px}
+  .gate-nat div{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--ink-soft);line-height:1.55}
+  .gate-nat span{color:var(--clay);font-family:'Hanken Grotesk',sans-serif}
+
+  /* =========== MOVIMENTOS (accordion) =========== */
+  .movs{display:flex;flex-direction:column;gap:14px;margin-top:32px}
+  .mov{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--card);transition:border-color .25s,box-shadow .25s}
+  .mov.active{border-color:var(--clay);box-shadow:0 18px 40px -28px rgba(126,69,36,.4)}
+  .mov-head{display:flex;align-items:stretch;cursor:pointer}
+  .mov-left{width:74px;min-width:74px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+  .m1 .mov-left{background:linear-gradient(160deg,#EEF1E1,#E4E9D3)}
+  .m2 .mov-left{background:linear-gradient(160deg,#F7E9D6,#F0DCC1)}
+  .m3 .mov-left{background:linear-gradient(160deg,#E9E7F4,#E0DDF0)}
+  .mn{font-family:'Fraunces',serif;font-weight:400;font-size:26px;line-height:1}
+  .m1 .mn{color:#3B5418}.m2 .mn{color:#7E4524}.m3 .mn{color:#403886}
+  .ml{font-family:'Hanken Grotesk',sans-serif;font-size:9px;font-weight:700;letter-spacing:.14em}
+  .m1 .ml{color:#4C6B22}.m2 .ml{color:#9A5a2c}.m3 .ml{color:#544aa0}
+  .mov-mid{flex:1;padding:20px 18px}
+  .mov-nome{font-family:'Fraunces',serif;font-weight:400;font-size:19px;line-height:1.2;margin-bottom:5px;letter-spacing:-.01em}
+  .mov-verdade{font-size:14px;color:var(--muted);font-style:italic;line-height:1.5}
+  .mov-arrow{display:flex;align-items:center;padding:0 20px;color:var(--clay);font-size:13px;transition:transform .3s}
+  .mov.active .mov-arrow{transform:rotate(90deg)}
+  .mov-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+  .mov.active .mov-body{grid-template-rows:1fr}
+  .mov-body>div{overflow:hidden;border-top:0px solid var(--line)}
+  .mov.active .mov-body>div{border-top-width:1px}
+
+  .mb-sec{padding:22px;border-bottom:1px solid var(--line-soft)}
+  .mb-sec:last-child{border-bottom:none}
+  .conceito{background:var(--paper);border-radius:12px;padding:18px 20px}
+  .conceito-t{font-family:'Fraunces',serif;font-style:italic;font-size:17px;margin-bottom:8px}
+  .conceito-x{font-size:15px;color:var(--ink-soft);line-height:1.7}
+  .sentis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+  .sent{border:1px solid var(--line);border-radius:11px;padding:14px;background:#fff}
+  .sent-n{font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:.04em;margin-bottom:5px;color:var(--clay-deep)}
+  .sent-d{font-size:13px;color:var(--muted);line-height:1.5}
+  .nat{display:flex;flex-direction:column;gap:11px}
+  .nat div{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;color:var(--ink-soft);line-height:1.6}
+  .nat span{color:var(--clay);font-family:'Hanken Grotesk',sans-serif}
+  .pqs{display:flex;flex-direction:column;gap:11px}
+  .pq{display:flex;gap:11px;align-items:flex-start;font-size:15.5px;color:var(--ink-soft);line-height:1.55}
+  .pq i{color:var(--clay);font-style:normal}
+  .fala{border-left:2px solid var(--clay);background:var(--paper);border-radius:0 12px 12px 0;padding:16px 18px}
+  .fala .label{margin-bottom:8px}
+  .fala-x{font-family:'Newsreader',serif;font-style:italic;font-size:15.5px;line-height:1.75;color:var(--ink)}
+
+  /* =========== REENCONTRO =========== */
+  .reunion{background:linear-gradient(180deg,#23291C 0%, #1B2015 100%);color:#E7E9D9}
+  .reunion .label{color:#A9C081}
+  .reunion .section-title{color:#F2F4E6}
+  .reunion .lead{color:#CBD2B6}
+  .reunion-q{margin-top:34px;font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:clamp(22px,4.2vw,32px);line-height:1.3;color:#CFE0A6}
+  .reunion-grid{margin-top:38px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .rg{border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:20px}
+  .rg h5{font-family:'Hanken Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#BcCf95;margin-bottom:8px}
+  .rg p{font-size:14.5px;line-height:1.6;color:#C3CBAC}
+  @media(max-width:560px){.reunion-grid{grid-template-columns:1fr}}
+
+  /* =========== NÍVEIS =========== */
+  .levels{display:flex;flex-direction:column;gap:14px;margin-top:32px}
+  .lvl{border:1px solid var(--line);border-radius:16px;padding:24px;background:var(--card);display:flex;gap:20px;align-items:flex-start}
+  .lvl-n{font-family:'Fraunces',serif;font-style:italic;color:var(--clay);font-size:15px;min-width:118px;padding-top:3px}
+  .lvl-t{font-family:'Fraunces',serif;font-size:18px;margin-bottom:6px}
+  .lvl-x{font-size:15px;color:var(--ink-soft);line-height:1.65}
+  @media(max-width:560px){.lvl{flex-direction:column;gap:8px}.lvl-n{min-width:0}}
+
+  /* outcomes */
+  .outs{margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .out{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .out .o-from{font-size:14px;color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
+  .out .o-to{font-family:'Fraunces',serif;font-size:18px;margin-top:6px;line-height:1.3;color:var(--ink)}
+  @media(max-width:560px){.outs{grid-template-columns:1fr}}
+
+  /* =========== FECHO =========== */
+  .close{background:var(--night);color:#EDE3CF;text-align:center}
+  .close .body-p{color:#CCBFA6;max-width:560px;margin:24px auto 0}
+  .close-frase{font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:clamp(24px,5vw,38px);line-height:1.28;color:#F0C58A;margin-top:40px;letter-spacing:-.01em}
+  .sig{margin-top:34px;font-family:'Hanken Grotesk',sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#9C8E76}
+
+  .hr{height:1px;background:var(--line);max-width:760px;margin:0 auto}
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <svg class="ridge" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,160 L0,96 L180,120 L360,70 L560,110 L760,48 L980,100 L1180,62 L1320,104 L1440,80 L1440,160 Z" fill="rgba(0,0,0,.35)"/>
+    <path d="M0,160 L0,128 L220,138 L440,108 L660,134 L900,96 L1140,128 L1340,112 L1440,130 L1440,160 Z" fill="rgba(0,0,0,.55)"/>
+  </svg>
+  <div class="hero-inner">
+    <div class="eyebrow reveal">Sua Própria Trilha · O Método</div>
+    <div class="kicker reveal" style="animation-delay:.08s">Imersão de reconexão para CEOs e fundadores</div>
+    <h1 class="reveal" style="animation-delay:.16s">Você comanda tudo lá fora.<br>Quando foi a última vez<br>que esteve <em>com você?</em></h1>
+    <p class="hero-sub reveal" style="animation-delay:.26s">Um método para o líder desligar o mundo exterior por tempo suficiente para reencontrar quem ficou por baixo do cargo, e voltar sentindo o que tem de melhor dentro de si.</p>
+    <div class="hero-meta reveal" style="animation-delay:.36s">
+      <span>Sem sinal</span><span>Sem cargo</span><span>Sem atalho</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== A CONDIÇÃO ===================== -->
+<section class="block condition">
+  <div class="wrap">
+    <div class="label reveal">A condição</div>
+    <h2 class="section-title reveal" style="margin-top:14px;animation-delay:.05s">O exílio de si mesmo</h2>
+    <p class="lead reveal" style="animation-delay:.1s">Não é cansaço. Cansaço se resolve com férias. O que acontece com quem lidera por anos é mais silencioso: o mundo de fora foi ocupando tanto espaço que o mundo de dentro virou um estranho.</p>
+    <div class="cond-list">
+      <div class="cond-row reveal"><div class="ci">i.</div><p>Você responde a tudo, decide por dezenas de pessoas e está <b>disponível 24 horas</b>, menos para você.</p></div>
+      <div class="cond-row reveal"><div class="ci">ii.</div><p>Sua identidade se fundiu ao cargo. <b>Você não sabe mais quem é sem a empresa</b> respondendo por você.</p></div>
+      <div class="cond-row reveal"><div class="ci">iii.</div><p>No raro silêncio, surge desconforto. Então você o preenche com mais uma tela, mais uma meta, <b>mais ruído.</b></p></div>
+    </div>
+    <p class="cond-punch reveal">Você tem tudo lá fora.<br>E quase nada por dentro.</p>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- ===================== ORIGEM / PARA QUEM ===================== -->
+<section class="block">
+  <div class="wrap">
+    <div class="num-eyebrow reveal"><span class="n">i</span><span class="eyebrow">De onde nasceu o método</span></div>
+    <p class="lead reveal" style="margin-top:0">Este método não veio de um livro. Veio de uma trilha real, de uma mochila pesada demais e de um cume que reorganiza a perspectiva de tudo. Três frases o resumem:</p>
+    <div class="origin reveal" style="margin-top:28px">
+      <div class="label">As três frases de origem</div>
+      <q>Primeiro, preciso me preparar melhor para não sofrer à toa.</q>
+      <q>Pesos na mochila que não usarei, ou que não são meus, só me desgastam.</q>
+      <q>Quando chego ao cume, já estou pensando no próximo. Nunca chego de verdade.</q>
+    </div>
+
+    <h2 class="section-title reveal" style="margin-top:64px">Para quem é</h2>
+    <div class="audience">
+      <div class="aud-card aud-yes reveal">
+        <h4>É para você se</h4>
+        <ul>
+          <li>Construiu algo real, e se perdeu no caminho.</li>
+          <li>Tem tudo a mostrar e um vazio que ninguém vê.</li>
+          <li>Não consegue mais desligar, nem quando tenta.</li>
+          <li>Quer clareza, não mais uma palestra motivacional.</li>
+        </ul>
+      </div>
+      <div class="aud-card aud-no reveal" style="animation-delay:.08s">
+        <h4>Não é para quem</h4>
+        <ul>
+          <li>Procura fórmula, atalho ou hack de produtividade.</li>
+          <li>Quer aplausos, não verdade.</li>
+          <li>Não topa ficar três dias sem sinal.</li>
+          <li>Acha que já chegou onde precisava chegar.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- ===================== DESCONEXÃO (porta de entrada) ===================== -->
+<section class="block">
+  <div class="wrap">
+    <div class="num-eyebrow reveal"><span class="n">ii</span><span class="eyebrow">A porta de entrada</span></div>
+    <h2 class="section-title reveal" style="animation-delay:.05s">Primeiro, desligue o mundo</h2>
+    <p class="lead reveal" style="animation-delay:.1s">Não dá para reencontrar a si mesmo com o mundo gritando no ouvido. Antes dos três movimentos, existe uma condição que não se negocia: <em>a desconexão.</em></p>
+    <div class="gate reveal">
+      <div class="label">Movimento zero · Desconexão</div>
+      <h3>A montanha não pede. Ela obriga.</h3>
+      <p>Lá em cima não há sinal. Não há quem você lidere. Não há ninguém para quem você precise ser "o CEO". Pela primeira vez em anos, você não é o cargo, é apenas uma pessoa carregando uma mochila morro acima.</p>
+      <p>Esse despir é a porta. Tudo o que vem depois (preparo, leveza, presença) só acontece <strong>depois que o mundo de fora se cala.</strong></p>
+      <div class="gate-nat">
+        <div><span>→</span><div>Sem sinal, não por força de vontade, mas porque <strong>a natureza desliga por você.</strong></div></div>
+        <div><span>→</span><div>Ninguém ali sabe que você é o chefe. <strong>O crachá não sobe a montanha.</strong></div></div>
+        <div><span>→</span><div>O corpo assume o comando que era da mente. <strong>E a mente, enfim, descansa.</strong></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- ===================== OS TRÊS MOVIMENTOS ===================== -->
+<section class="block">
+  <div class="wrap">
+    <div class="num-eyebrow reveal"><span class="n">iii</span><span class="eyebrow">O coração do método</span></div>
+    <h2 class="section-title reveal" style="animation-delay:.05s">Os três movimentos</h2>
+    <p class="lead reveal" style="animation-delay:.1s">Simples, poderosos e impossíveis de fingir. Toque para abrir cada um.</p>
+
+    <div class="movs">
+
+      <!-- M1 -->
+      <div class="mov m1 reveal">
+        <div class="mov-head" onclick="tog(this)">
+          <div class="mov-left"><span class="mn">01</span><span class="ml">PREPARO</span></div>
+          <div class="mov-mid"><div class="mov-nome">Prepare-se para não sofrer à toa</div><div class="mov-verdade">"Muito do meu sofrimento não era inevitável. Era falta de preparo."</div></div>
+          <div class="mov-arrow">▶</div>
+        </div>
+        <div class="mov-body"><div>
+          <div class="mb-sec"><div class="label">O conceito</div><div class="conceito" style="margin-top:10px"><div class="conceito-t">O sofrimento evitável</div><div class="conceito-x">Na trilha, quem vai sem preparo sofre mais do que precisa. Os pés machucam pelo tênis errado. O fôlego falta porque nunca treinou. A água acaba porque não calculou. Não é falta de força. É falta de preparo.<br><br>Na liderança é igual. Reuniões que viram conflito porque o líder não se preparou emocionalmente. Decisões erradas por falta de pausa. Equipes perdidas por nunca ter havido clareza sobre o destino.<br><br><strong>Preparação não é fraqueza. É respeito pelo caminho que se vai percorrer.</strong></div></div></div>
+          <div class="mb-sec"><div class="label">Sentimentos que emergem</div><div class="sentis" style="margin-top:10px">
+            <div class="sent"><div class="sent-n">Alívio</div><div class="sent-d">Perceber que o sofrimento tinha solução, e era simples.</div></div>
+            <div class="sent"><div class="sent-n">Responsabilidade</div><div class="sent-d">O que estava na minha mão e eu não fiz.</div></div>
+            <div class="sent"><div class="sent-n">Clareza</div><div class="sent-d">Saber o que mudar antes do próximo ciclo.</div></div>
+            <div class="sent"><div class="sent-n">Força</div><div class="sent-d">Preparado, você vai muito mais longe.</div></div>
+          </div></div>
+          <div class="mb-sec"><div class="label">O que a natureza provoca</div><div class="nat" style="margin-top:10px">
+            <div><span>→</span><div>O cansaço da subida revela quem se preparou e quem não, <strong>sem precisar dizer nada.</strong></div></div>
+            <div><span>→</span><div>O equipamento certo contra o errado faz diferença visível. <strong>O corpo conta a história.</strong></div></div>
+            <div><span>→</span><div>A pausa antes da passagem difícil ensina que <strong>parar para pensar é ganhar caminho.</strong></div></div>
+          </div></div>
+          <div class="mb-sec"><div class="label">Perguntas que você faz</div><div class="pqs" style="margin-top:10px">
+            <div class="pq"><i>·</i><div><strong>"Onde você costuma entrar sem preparo, e paga caro por isso?"</strong></div></div>
+            <div class="pq"><i>·</i><div>"Se soubesse o que viria, o que teria feito diferente?"</div></div>
+            <div class="pq"><i>·</i><div>"Quais conversas você está adiando, e que custam mais caro a cada dia?"</div></div>
+          </div></div>
+          <div class="mb-sec"><div class="label">Sua fala · como conduzir</div><div class="fala" style="margin-top:10px"><div class="label">Momento · antes da subida</div><div class="fala-x">"Antes de subir, quero te contar algo que a trilha me ensinou. O sofrimento de hoje virá de dois tipos. Um é inevitável: o esforço, o limite do corpo, e faz parte. O outro é evitável: é o sofrimento de quem não se preparou. Na empresa é igual. Boa parte do que te desgasta não é o peso do cargo. É o que você poderia ter preparado, e não preparou."</div></div></div>
+        </div></div>
+      </div>
+
+      <!-- M2 -->
+      <div class="mov m2 reveal">
+        <div class="mov-head" onclick="tog(this)">
+          <div class="mov-left"><span class="mn">02</span><span class="ml">BAGAGEM</span></div>
+          <div class="mov-mid"><div class="mov-nome">Solte o que não é seu</div><div class="mov-verdade">"Carrego um peso que não me pertence, e ele me destrói."</div></div>
+          <div class="mov-arrow">▶</div>
+        </div>
+        <div class="mov-body"><div>
+          <div class="mb-sec"><div class="label">O conceito</div><div class="conceito" style="margin-top:10px"><div class="conceito-t">A mochila invisível</div><div class="conceito-x">Todo líder carrega uma mochila. Dentro: decisões adiadas, expectativas alheias que viraram suas, responsabilidades que nunca deveriam ter sido suas, culpas antigas, medos sem nome.<br><br>Você não escolheu colocar tudo isso lá. Foi acumulando. E agora sobe a montanha esgotando-se antes do topo.<br><br><strong>A pergunta não é se você aguenta carregar. É: por que ainda está carregando isso?</strong></div></div></div>
+          <div class="mb-sec"><div class="label">Sentimentos que emergem</div><div class="sentis" style="margin-top:10px">
+            <div class="sent"><div class="sent-n">Alívio</div><div class="sent-d">Nomear o peso que nunca tinha sido nomeado.</div></div>
+            <div class="sent"><div class="sent-n">Raiva</div><div class="sent-d">Perceber por quanto tempo carregou o que não era seu.</div></div>
+            <div class="sent"><div class="sent-n">Leveza</div><div class="sent-d">A sensação física de soltar, real, no corpo.</div></div>
+            <div class="sent"><div class="sent-n">Resiliência</div><div class="sent-d">Sem esse peso, você vai muito mais longe.</div></div>
+          </div></div>
+          <div class="mb-sec"><div class="label">O que a natureza provoca</div><div class="nat" style="margin-top:10px">
+            <div><span>→</span><div>A mochila com peso real é a metáfora mais poderosa do método. <strong>Você sente no corpo o que carrega na vida.</strong></div></div>
+            <div><span>→</span><div>Tirar a mochila no topo, respirar, é o ritual de soltar. <strong>Simples. Definitivo. Inesquecível.</strong></div></div>
+            <div><span>→</span><div>Subir com e sem peso é uma diferença sentida no corpo. <strong>Não precisa de explicação.</strong></div></div>
+          </div></div>
+          <div class="mb-sec"><div class="label">Perguntas que você faz</div><div class="pqs" style="margin-top:10px">
+            <div class="pq"><i>·</i><div><strong>"O que você está carregando que não é seu?"</strong></div></div>
+            <div class="pq"><i>·</i><div>"Se tirasse três coisas dessa mochila agora, sem culpa, o que sairia primeiro?"</div></div>
+            <div class="pq"><i>·</i><div>"Quem colocou esse peso aí? E por que você deixou?"</div></div>
+            <div class="pq"><i>·</i><div>"Como seria sua semana se você subisse mais leve?"</div></div>
+          </div></div>
+          <div class="mb-sec"><div class="label">Sua fala · como conduzir</div><div class="fala" style="margin-top:10px"><div class="label">Momento · meio da subida</div><div class="fala-x">"Para um segundo. Sente o peso dessa mochila nas costas? É real. Mas na sua vida, nem tudo que você carrega foi você quem escolheu. Tem expectativa de pai. Cobrança de sócio. Decisão que alguém empurrou. Culpa por algo que nem foi sua responsabilidade. A pergunta que quero que você se faça enquanto sobe é essa: o que aqui dentro não é meu? Porque o topo é o mesmo, mas você chega em outro estado, dependendo do que decidir soltar no caminho."</div></div></div>
+        </div></div>
+      </div>
+
+      <!-- M3 -->
+      <div class="mov m3 reveal">
+        <div class="mov-head" onclick="tog(this)">
+          <div class="mov-left"><span class="mn">03</span><span class="ml">PRESENÇA</span></div>
+          <div class="mov-mid"><div class="mov-nome">Chegue de verdade onde você está</div><div class="mov-verdade">"Conquisto e já estou no próximo. Nunca chego de verdade a lugar nenhum."</div></div>
+          <div class="mov-arrow">▶</div>
+        </div>
+        <div class="mov-body"><div>
+          <div class="mb-sec"><div class="label">O conceito</div><div class="conceito" style="margin-top:10px"><div class="conceito-t">O líder que nunca chega</div><div class="conceito-x">Você passou anos subindo. Faturamento cresceu. Equipe cresceu. Empresa cresceu. E no dia em que chegou onde queria, já estava olhando para o próximo pico.<br><br>Nunca celebrou de verdade. Nunca descansou de verdade. Nunca olhou para trás para ver o quanto construiu. Sempre na próxima meta. Sempre no próximo problema.<br><br><strong>Isso não é ambição. É fuga. E a natureza não deixa você fugir.</strong></div></div></div>
+          <div class="mb-sec"><div class="label">Sentimentos que emergem</div><div class="sentis" style="margin-top:10px">
+            <div class="sent"><div class="sent-n">Gratidão</div><div class="sent-d">Ver o quanto já construiu, e que ficou invisível.</div></div>
+            <div class="sent"><div class="sent-n">Paz</div><div class="sent-d">A raridade de estar num lugar sem querer ir embora.</div></div>
+            <div class="sent"><div class="sent-n">Superação</div><div class="sent-d">Cheguei. Com meu corpo, meu esforço, minha decisão.</div></div>
+            <div class="sent"><div class="sent-n">Clareza</div><div class="sent-d">Daqui de cima, o próximo passo fica óbvio, sem pressa.</div></div>
+          </div></div>
+          <div class="mb-sec"><div class="label">O que a natureza provoca</div><div class="nat" style="margin-top:10px">
+            <div><span>→</span><div>O topo é físico e definitivo. <strong>Não tem como simular que chegou.</strong></div></div>
+            <div><span>→</span><div>A vista de 360° força a perspectiva. <strong>O problema gigante lá embaixo cabe numa janela pequena aqui de cima.</strong></div></div>
+            <div><span>→</span><div>O silêncio no topo é o único momento em que o líder para sem desculpa. <strong>Sem reunião. Sem sinal. Só o que está dentro.</strong></div></div>
+          </div></div>
+          <div class="mb-sec"><div class="label">Perguntas que você faz</div><div class="pqs" style="margin-top:10px">
+            <div class="pq"><i>·</i><div><strong>"Quando foi a última vez que você chegou a um lugar e ficou, sem já pensar no próximo?"</strong></div></div>
+            <div class="pq"><i>·</i><div>"O que você construiu nos últimos anos e nunca parou para celebrar?"</div></div>
+            <div class="pq"><i>·</i><div>"Daqui de cima, o que parece urgente lá embaixo e aqui parece pequeno?"</div></div>
+          </div></div>
+          <div class="mb-sec"><div class="label">Sua fala · como conduzir</div><div class="fala" style="margin-top:10px"><div class="label">Momento · chegada ao topo</div><div class="fala-x">"Você chegou. Não metaforicamente, fisicamente. Com seu corpo, seu esforço, sua decisão de continuar quando estava cansado. Agora vou te pedir algo que você provavelmente nunca faz: fica aqui. Não pensa na descida. Não pensa no que vem depois. Fica. Porque a maior tragédia de um líder não é não chegar ao topo. É chegar, e não conseguir ficar."</div></div></div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- ===================== REENCONTRO COM O EU ===================== -->
+<section class="block reunion">
+  <div class="wrap">
+    <div class="label reveal">O ouro do método</div>
+    <h2 class="section-title reveal" style="margin-top:14px;animation-delay:.05s">O reencontro com o Eu</h2>
+    <p class="lead reveal" style="animation-delay:.1s">Por baixo do CEO existe alguém que você não visita há anos. A pessoa que começou tudo, antes das metas, da imagem, do peso. Quando o ruído de fora finalmente se cala, <em>essa pessoa volta a falar.</em></p>
+    <p class="reunion-q reveal">Não em palavras.<br>Em sensação: uma leveza esquecida, uma alegria antiga, uma clareza que não vem da análise.</p>
+    <div class="reunion-grid">
+      <div class="rg reveal"><h5>Sentir o que tem de melhor</h5><p>Há em você uma essência que sobreviveu a tudo. A montanha não a cria, ela a descobre.</p></div>
+      <div class="rg reveal" style="animation-delay:.06s"><h5>Viver o Eu</h5><p>Por algumas horas, você não decide por ninguém. Só existe. E lembra como era ser inteiro.</p></div>
+      <div class="rg reveal" style="animation-delay:.12s"><h5>A voz que sumiu</h5><p>A intuição que você terceirizou para planilhas e conselhos volta a ter volume.</p></div>
+      <div class="rg reveal" style="animation-delay:.18s"><h5>O retorno</h5><p>Você desce outro. Não com mais técnica, com mais presença. E isso muda como você lidera tudo.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- ===================== A JORNADA / NÍVEIS ===================== -->
+<section class="block">
+  <div class="wrap">
+    <div class="num-eyebrow reveal"><span class="n">iv</span><span class="eyebrow">A jornada</span></div>
+    <h2 class="section-title reveal" style="animation-delay:.05s">O mesmo método.<br>Profundidade crescente.</h2>
+    <p class="lead reveal" style="animation-delay:.1s">Três níveis de imersão. Quanto mais tempo na montanha, mais fundo o método chega.</p>
+    <div class="levels">
+      <div class="lvl reveal"><div class="lvl-n">Nível 1 · Cume</div><div><div class="lvl-t">Os três movimentos em um dia</div><div class="lvl-x">Os três movimentos vividos em sequência durante a trilha. Preparo antes de subir. Bagagem no meio do caminho. Presença no topo. Sai-se com uma percepção clara, ainda na superfície, mas inegável.</div></div></div>
+      <div class="lvl reveal" style="animation-delay:.06s"><div class="lvl-n">Nível 2 · Correnteza</div><div><div class="lvl-t">Mais tempo, mais carga</div><div class="lvl-x">Dois dias e uma noite. A noite é o divisor, onde os sentimentos do dia são processados em roda. Vai-se mais fundo. A travessia da caverna é o Movimento 2 transformado em experiência total.</div></div></div>
+      <div class="lvl reveal" style="animation-delay:.12s"><div class="lvl-n">Nível 3 · Travessia</div><div><div class="lvl-t">Transformação real</div><div class="lvl-x">Três dias acampados. Os movimentos deixam de ser momentos: passam a ser vividos continuamente. Sem conforto. Sem desculpa. É onde o método entrega o que promete: um antes e um depois reais.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- ===================== O QUE MUDA ===================== -->
+<section class="block">
+  <div class="wrap">
+    <div class="num-eyebrow reveal"><span class="n">v</span><span class="eyebrow">O que muda quando você desce</span></div>
+    <h2 class="section-title reveal" style="animation-delay:.05s">O retorno</h2>
+    <div class="outs">
+      <div class="out reveal"><div class="o-from">Decisões movidas por ansiedade</div><div class="o-to">Decisões que nascem da clareza</div></div>
+      <div class="out reveal" style="animation-delay:.05s"><div class="o-from">Disponível para todos, menos para si</div><div class="o-to">Capaz de desligar quando escolhe</div></div>
+      <div class="out reveal" style="animation-delay:.1s"><div class="o-from">Carregando o peso dos outros</div><div class="o-to">Lúcido sobre o que é, e o que não é, seu</div></div>
+      <div class="out reveal" style="animation-delay:.15s"><div class="o-from">Presente no corpo, ausente na vida</div><div class="o-to">Inteiro onde escolhe estar</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FECHAMENTO ===================== -->
+<section class="block close">
+  <div class="wrap">
+    <div class="label reveal" style="color:#E6B879">A frase que resume tudo</div>
+    <p class="body-p reveal" style="animation-delay:.05s">Você não precisa de mais esforço. Precisa de <strong style="color:#F0E1CC">preparo</strong> para não sofrer à toa, de <strong style="color:#F0E1CC">leveza</strong> para soltar o que não é seu, e de <strong style="color:#F0E1CC">presença</strong> para chegar de verdade onde você está.</p>
+    <p class="close-frase reveal">"A trilha não te ensina o que você não sabe.<br>Ela revela o que você sempre soube,<br>mas nunca parou para ouvir."</p>
+    <div class="sig reveal">Sua Própria Trilha · Wex Servilieri</div>
+  </div>
+</section>
+
+<script>
+function tog(head){
+  const mov=head.parentElement;
+  const open=mov.classList.contains('active');
+  document.querySelectorAll('.mov').forEach(m=>m.classList.remove('active'));
+  if(!open) mov.classList.add('active');
+}
+// staggered reveal on scroll
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.style.animationPlayState='running'; io.unobserve(e.target);} });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>{
+  // hero reveals run immediately; others wait for scroll
+  if(!el.closest('.hero')){ el.style.animationPlayState='paused'; io.observe(el);}
+});
+</script>
+</body>
+</html>
