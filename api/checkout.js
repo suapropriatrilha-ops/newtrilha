@@ -60,6 +60,8 @@ module.exports = async (req, res) => {
       failure: `${base}/livros/${slug}/`,
     },
     auto_return: "approved",
+    // Avisa nosso webhook quando o pagamento muda de status (ex.: Pix aprovado).
+    notification_url: `${base}/api/webhook`,
   };
 
   try {
