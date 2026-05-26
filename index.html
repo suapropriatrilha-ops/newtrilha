@@ -1,310 +1,1177 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="robots" content="noindex, nofollow" />
-<title>Admin · Sua Própria Trilha</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0A1218">
+<title>Sua Própria Trilha · Um lugar para respirar, refletir e reconstruir.</title>
+<meta name="description" content="Sua Própria Trilha é um movimento sobre recomeço, disciplina e reconstrução pessoal. Uma biblioteca de e-books, vídeos e caminhos para quem decidiu caminhar a própria rota.">
+<meta property="og:title" content="Sua Própria Trilha">
+<meta property="og:description" content="Um lugar para respirar, refletir e reconstruir a própria vida.">
+<meta property="og:type" content="website">
+
+<link rel="icon" type="image/png" href="/assets/logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Manrope:wght@300;400;500;600&family=Caveat:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --bg:#0e120f; --panel:#161b16; --panel-2:#1d231d; --line:#2a322a;
-    --ink:#ece7da; --muted:#9aa295; --gold:#e9b44c; --gold-ink:#1a1407;
-    --ok-bg:#1d2a1d; --ok-ink:#9cd29c; --warn-bg:#2c2614; --warn-ink:#e3c469;
-    --danger:#d98a7a; --radius:12px;
+/* =========================================================
+   TOKENS
+   ========================================================= */
+:root{
+  --bg:        #0A1218;
+  --bg-2:      #0F1820;
+  --bg-3:      #18222C;
+  --bg-soft:   #1D2832;
+  --bg-rgb:    10,18,24;
+  --line:      rgba(237,230,214,.08);
+  --line-2:    rgba(237,230,214,.14);
+
+  --ink:       #EDE6D6;
+  --ink-mute:  #A39B8A;
+  --ink-soft:  #6B6558;
+  --ink-deep:  #3F3B33;
+
+  --moss:      #4A6B5C;
+  --moss-deep: #2B4332;
+  --amber:     #D4A574;
+  --gold:      #E8B96B;
+  --rust:      #8B5A3C;
+
+  --serif:     "Fraunces", "Cormorant Garamond", Georgia, serif;
+  --sans:      "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
+  --script:    "Caveat", cursive;
+
+  --ease:      cubic-bezier(.2,.7,.2,1);
+  --ease-out:  cubic-bezier(.16,1,.3,1);
+  --slow:      1200ms var(--ease);
+  --med:       600ms var(--ease);
+  --fast:      300ms var(--ease);
+
+  --maxw:      1320px;
+  --gut:       clamp(20px, 4vw, 56px);
+}
+
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+html, body{ background:var(--bg); color:var(--ink); }
+body{
+  font-family:var(--sans);
+  font-weight:300;
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+  letter-spacing:.005em;
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:9999;
+  opacity:.06; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+img{ display:block; max-width:100%; height:auto; }
+a{ color:inherit; text-decoration:none; }
+button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
+::selection{ background:var(--moss-deep); color:var(--ink); }
+
+.serif{ font-family:var(--serif); font-weight:400; }
+.script{ font-family:var(--script); }
+
+.eyebrow{
+  font-family:var(--sans); font-size:11px; font-weight:500;
+  letter-spacing:.32em; text-transform:uppercase; color:var(--ink-mute);
+  display:inline-flex; align-items:center; gap:14px;
+}
+.eyebrow::before{ content:""; width:32px; height:1px; background:var(--amber); }
+.section-num{
+  font-family:var(--serif); font-style:italic; font-size:13px;
+  color:var(--amber); letter-spacing:.1em;
+}
+.shell{ width:100%; max-width:var(--maxw); margin:0 auto; padding:0 var(--gut); }
+
+/* =========================================================
+   NAV
+   ========================================================= */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding:20px var(--gut);
+  display:flex; align-items:center; justify-content:space-between;
+  transition:background var(--med), backdrop-filter var(--med), border-color var(--med), padding var(--med);
+  border-bottom:1px solid transparent;
+}
+.nav.is-scrolled{
+  background:rgba(10,18,24,.72);
+  backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);
+  border-bottom-color:var(--line);
+  padding-top:14px; padding-bottom:14px;
+}
+.nav__brand{ display:flex; align-items:center; gap:14px; transition:opacity var(--fast); }
+.nav__brand:hover{ opacity:.85; }
+.nav__logo{
+  width:44px; height:44px; object-fit:contain; display:block;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.35));
+  transition: width var(--med), height var(--med);
+}
+.nav.is-scrolled .nav__logo{ width:36px; height:36px; }
+.nav__name{
+  display:flex; flex-direction:column;
+  font-family:var(--serif); font-style:italic; font-weight:400;
+  font-size:18px; letter-spacing:.005em; color:var(--ink); line-height:1.05;
+  transition:font-size var(--med);
+}
+.nav.is-scrolled .nav__name{ font-size:16px; }
+.nav__name small{
+  display:block; font-family:var(--sans); font-style:normal;
+  font-size:9px; font-weight:500; letter-spacing:.32em; text-transform:uppercase;
+  color:var(--ink-soft); margin-top:5px;
+}
+.nav__name small em{ font-style:normal; color:var(--amber); }
+@media (max-width:880px){ .nav__name small{ display:none; } .nav__name{ font-size:16px; } }
+
+.nav__menu{ display:flex; align-items:center; gap:32px; }
+.nav__link{
+  font-size:12px; font-weight:500; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-mute); transition:color var(--fast); position:relative;
+}
+.nav__link:hover{ color:var(--ink); }
+.nav__link::after{
+  content:""; position:absolute; left:0; bottom:-6px; width:0; height:1px;
+  background:var(--amber); transition:width var(--med) var(--ease-out);
+}
+.nav__link:hover::after{ width:100%; }
+
+.nav__cta{
+  font-family:var(--sans); font-size:11px; font-weight:600;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--ink);
+  border:1px solid var(--line-2); padding:10px 22px; border-radius:999px;
+  transition:background var(--fast), border-color var(--fast), color var(--fast);
+  display:inline-flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:1px; line-height:1;
+}
+.nav__cta-sub{
+  font-size:8.5px; font-weight:400; letter-spacing:.22em;
+  opacity:.6; margin-top:3px;
+}
+.nav__cta:hover{ background:var(--ink); color:var(--bg); border-color:var(--ink); }
+.nav__cta:hover .nav__cta-sub{ opacity:.7; }
+
+.nav__burger{ display:none; width:28px; height:28px; position:relative; }
+.nav__burger span{
+  position:absolute; left:0; right:0; height:1px; background:var(--ink); transition:transform var(--fast);
+}
+.nav__burger span:nth-child(1){ top:10px; }
+.nav__burger span:nth-child(2){ bottom:10px; }
+@media (max-width:1080px){
+  .nav__menu{ gap:22px; } .nav__link{ font-size:11px; letter-spacing:.16em; }
+}
+@media (max-width:920px){
+  .nav__menu{ display:none; } .nav__cta{ display:none; } .nav__burger{ display:block; }
+}
+.mmenu{
+  position:fixed; inset:0; z-index:99;
+  background:rgba(10,18,24,.97); backdrop-filter:blur(22px);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:28px; opacity:0; pointer-events:none; transition:opacity var(--med);
+}
+.mmenu.is-open{ opacity:1; pointer-events:auto; }
+.mmenu a{ font-family:var(--serif); font-size:32px; font-style:italic; color:var(--ink); }
+.mmenu small{ color:var(--ink-soft); font-size:11px; letter-spacing:.3em; text-transform:uppercase; }
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero{
+  position:relative; min-height:100vh; min-height:100svh;
+  display:flex; align-items:flex-end; overflow:hidden; isolation:isolate;
+}
+.hero__media{ position:absolute; inset:0; z-index:-2; background:#000; }
+.hero__media img{
+  width:100%; height:100%; object-fit:cover;
+  filter:brightness(.55) saturate(.85) contrast(1.05);
+  animation:kenburns 22s ease-in-out infinite alternate;
+}
+@keyframes kenburns{
+  from{ transform:scale(1.05) translate3d(0,0,0); }
+  to  { transform:scale(1.18) translate3d(-1.5%,-1%,0); }
+}
+.hero::before{
+  content:""; position:absolute; inset:0; z-index:-1;
+  background:
+    radial-gradient(120% 80% at 50% 20%, transparent 0%, rgba(10,18,24,.35) 60%, rgba(10,18,24,.92) 100%),
+    linear-gradient(180deg, rgba(10,18,24,.5) 0%, rgba(10,18,24,.1) 30%, rgba(10,18,24,.85) 100%);
+}
+
+.hero__content{
+  width:100%; max-width:var(--maxw); margin:0 auto;
+  padding:0 var(--gut) clamp(60px, 12vh, 140px);
+  position:relative;
+}
+.hero__eyebrow{
+  margin-bottom:36px; opacity:0; transform:translateY(20px);
+  animation:rise 1s var(--ease-out) .3s forwards;
+}
+.hero__title{
+  font-family:var(--serif); font-weight:300;
+  font-size:clamp(44px, 8.4vw, 132px);
+  line-height:.96; letter-spacing:-.02em;
+  color:var(--ink); max-width:18ch; margin-bottom:36px;
+}
+.hero__title em{ font-style:italic; font-weight:300; color:var(--amber); }
+.hero__title span{ display:block; opacity:0; transform:translateY(40px); animation:rise 1.2s var(--ease-out) forwards; }
+.hero__title span:nth-child(1){ animation-delay:.5s; }
+.hero__title span:nth-child(2){ animation-delay:.75s; }
+.hero__title span:nth-child(3){ animation-delay:1s; }
+
+.hero__sub{
+  max-width:46ch; font-size:15px; color:var(--ink-mute);
+  margin-bottom:48px; opacity:0; transform:translateY(20px);
+  animation:rise 1s var(--ease-out) 1.3s forwards;
+}
+.hero__actions{
+  display:flex; gap:20px; align-items:center; flex-wrap:wrap;
+  opacity:0; transform:translateY(20px);
+  animation:rise 1s var(--ease-out) 1.55s forwards;
+}
+
+.btn{
+  display:inline-flex; align-items:center; gap:14px;
+  font-family:var(--sans); font-size:12px; font-weight:600;
+  letter-spacing:.22em; text-transform:uppercase;
+  padding:18px 30px; border-radius:999px;
+  transition:background var(--med), color var(--med), border-color var(--med), transform var(--med);
+}
+.btn--primary{ background:var(--ink); color:var(--bg); border:1px solid var(--ink); }
+.btn--primary:hover{ background:var(--gold); border-color:var(--gold); transform:translateY(-2px); }
+.btn--ghost{ color:var(--ink); border:1px solid var(--line-2); }
+.btn--ghost:hover{ border-color:var(--ink); transform:translateY(-2px); }
+.btn .arrow{ display:inline-block; width:16px; height:1px; background:currentColor; position:relative; }
+.btn .arrow::after{
+  content:""; position:absolute; right:0; top:-3px; width:7px; height:7px;
+  border-top:1px solid currentColor; border-right:1px solid currentColor;
+  transform:rotate(45deg);
+}
+.btn:hover .arrow{ width:22px; transition:width var(--fast); }
+
+.hero__scroll{
+  position:absolute; right:var(--gut); bottom:36px;
+  display:flex; flex-direction:column; align-items:center; gap:14px;
+  font-size:10px; letter-spacing:.32em; text-transform:uppercase;
+  color:var(--ink-mute); writing-mode:vertical-rl;
+  opacity:0; animation:fade 1.2s var(--ease-out) 2s forwards;
+}
+.hero__scroll::after{
+  content:""; width:1px; height:60px;
+  background:linear-gradient(180deg, var(--ink-mute), transparent);
+  animation:scrollLine 2.4s ease-in-out infinite;
+}
+@keyframes scrollLine{
+  0%,100%{ transform:scaleY(.4); transform-origin:top; }
+  50%    { transform:scaleY(1); }
+}
+@keyframes rise{ to{ opacity:1; transform:translateY(0); } }
+@keyframes fade{ to{ opacity:1; } }
+
+.hero__coords{
+  position:absolute; left:var(--gut); top:120px;
+  font-family:var(--serif); font-style:italic; font-size:12px;
+  color:var(--ink-soft); letter-spacing:.08em;
+  display:flex; gap:18px; flex-wrap:wrap;
+}
+.hero__coords span::before{ content:"·  "; color:var(--amber); }
+@media (max-width:740px){ .hero__coords{ display:none; } }
+
+.hero__seal{
+  position:absolute; right:var(--gut); top:120px; z-index:2;
+  width:130px; height:130px;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; animation:sealIn 1.6s var(--ease-out) 1.8s forwards;
+}
+.hero__seal__circle{
+  position:relative; width:100%; height:100%; border-radius:50%;
+  border:1px solid rgba(232,185,107,.4);
+  background:rgba(10,18,24,.55);
+  backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+  display:flex; align-items:center; justify-content:center; overflow:hidden;
+}
+.hero__seal__circle img{
+  width:72%; height:auto; object-fit:contain;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.5));
+}
+.hero__seal::after{
+  content:"EST. 2025"; position:absolute;
+  bottom:-26px; left:50%; transform:translateX(-50%);
+  font-family:var(--serif); font-style:italic; font-size:11px;
+  letter-spacing:.18em; color:var(--ink-mute); white-space:nowrap;
+}
+@keyframes sealIn{ from{ opacity:0; transform:scale(.85); } to{ opacity:1; transform:scale(1); } }
+@media (max-width:740px){
+  .hero__seal{ width:84px; height:84px; top:96px; right:20px; }
+  .hero__seal::after{ font-size:9px; bottom:-20px; letter-spacing:.14em; }
+}
+
+/* brand-mark divider — full logo as editorial ornament */
+.brand-mark{
+  display:flex; align-items:center; justify-content:center;
+  gap:32px; padding:60px var(--gut); position:relative;
+}
+.brand-mark::before, .brand-mark::after{
+  content:""; flex:1; max-width:180px; height:1px;
+  background:linear-gradient(90deg, transparent, var(--line-2), transparent);
+}
+.brand-mark img{ height:120px; width:auto; opacity:.95; }
+@media (max-width:600px){
+  .brand-mark{ gap:18px; padding:40px var(--gut); }
+  .brand-mark img{ height:80px; }
+  .brand-mark::before, .brand-mark::after{ max-width:60px; }
+}
+
+/* =========================================================
+   SECTION BASE
+   ========================================================= */
+section{ position:relative; }
+.section{ padding:clamp(80px, 14vh, 180px) 0; }
+.section--soft{ background:var(--bg-2); }
+.section--deep{ background:var(--bg); }
+
+.section__head{
+  display:flex; align-items:flex-start; justify-content:space-between;
+  gap:64px; flex-wrap:wrap; margin-bottom:80px;
+}
+.section__title{
+  font-family:var(--serif); font-weight:300;
+  font-size:clamp(34px, 5.4vw, 72px);
+  line-height:1; letter-spacing:-.015em; max-width:18ch;
+}
+.section__title em{ font-style:italic; color:var(--amber); }
+.section__lede{
+  max-width:42ch; color:var(--ink-mute);
+  font-size:15px; line-height:1.7;
+}
+
+.reveal{ opacity:0; transform:translateY(40px); transition:opacity 1.1s var(--ease-out), transform 1.1s var(--ease-out); }
+.reveal.is-in{ opacity:1; transform:none; }
+.reveal.delay-1{ transition-delay:.1s; }
+.reveal.delay-2{ transition-delay:.2s; }
+.reveal.delay-3{ transition-delay:.3s; }
+.reveal.delay-4{ transition-delay:.4s; }
+
+/* =========================================================
+   MANIFESTO (pull-quote style)
+   ========================================================= */
+.pull{
+  padding:clamp(120px, 18vh, 220px) 0; text-align:center;
+  background:
+    radial-gradient(60% 80% at 50% 50%, rgba(212,165,116,.05), transparent 70%),
+    var(--bg);
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+}
+.pull .eyebrow{ justify-content:center; margin-bottom:48px; }
+.pull blockquote{
+  font-family:var(--serif); font-style:italic; font-weight:300;
+  font-size:clamp(28px, 5vw, 60px);
+  line-height:1.2; letter-spacing:-.01em;
+  max-width:24ch; margin:0 auto 36px;
+}
+.pull blockquote em{ font-style:italic; color:var(--amber); }
+.pull cite{
+  font-style:normal; font-size:12px; letter-spacing:.28em; text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.pull cite a{ color:var(--amber); transition:opacity var(--fast); }
+.pull cite a:hover{ opacity:.75; }
+
+/* =========================================================
+   STORY — QUEM É WEX
+   ========================================================= */
+.story{
+  display:grid; grid-template-columns: 1.05fr 1fr;
+  gap: clamp(40px, 6vw, 90px); align-items:center;
+}
+@media (max-width:900px){ .story{ grid-template-columns:1fr; } }
+
+.story__media{
+  position:relative; aspect-ratio: 4/5; overflow:hidden; border-radius:2px;
+}
+.story__media img{
+  width:100%; height:100%; object-fit:cover;
+  filter:grayscale(.18) contrast(1.05) brightness(.85);
+  transition:transform 1.6s var(--ease-out), filter 1.6s var(--ease-out);
+}
+.story__media:hover img{ transform:scale(1.04); filter:grayscale(0) contrast(1.05) brightness(.95); }
+.story__media::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, transparent 50%, rgba(10,18,24,.55));
+  pointer-events:none;
+}
+.story__caption{
+  position:absolute; left:24px; bottom:20px;
+  font-family:var(--serif); font-style:italic; font-size:13px; color:var(--ink-mute);
+}
+
+.story__body p{ margin-bottom:1.5em; font-size:16px; color:var(--ink-mute); line-height:1.85; }
+.story__body p:first-of-type::first-letter{
+  font-family:var(--serif); font-size:5em; float:left;
+  line-height:.85; padding:.05em .12em 0 0;
+  color:var(--amber); font-weight:400;
+}
+.story__body strong{ color:var(--ink); font-weight:500; }
+
+.story__signature{ margin-top:36px; display:flex; align-items:center; gap:18px; }
+.story__signature .script{
+  font-family:var(--script); font-size:42px; color:var(--gold); line-height:1;
+}
+.story__signature small{
+  display:block; font-size:11px; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--ink-soft);
+}
+
+.timeline{
+  margin-top:80px;
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:1px; background:var(--line);
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+}
+.timeline__cell{ background:var(--bg-2); padding:32px 24px; }
+.timeline__cell .num{
+  font-family:var(--serif); font-style:italic; font-size:13px;
+  color:var(--amber); letter-spacing:.08em; margin-bottom:14px; display:block;
+}
+.timeline__cell h4{
+  font-family:var(--serif); font-weight:400; font-size:22px;
+  line-height:1.2; margin-bottom:10px;
+}
+.timeline__cell p{ font-size:13px; color:var(--ink-soft); line-height:1.6; }
+@media (max-width:880px){ .timeline{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:480px){ .timeline{ grid-template-columns:1fr; } }
+
+/* =========================================================
+   BIBLIOTECA (livros) — reuses .products grid
+   ========================================================= */
+.products{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:24px;
+}
+@media (max-width:980px){ .products{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:520px){ .products{ grid-template-columns:1fr; } }
+
+.product{ cursor:pointer; display:block; }
+.product__img{
+  position:relative; aspect-ratio:4/5; overflow:hidden;
+  background:var(--bg-3); border-radius:2px;
+}
+.product__img img{
+  width:100%; height:100%; object-fit:cover;
+  filter:saturate(.9) brightness(.92);
+  transition:transform 1.4s var(--ease-out), filter var(--med);
+}
+.product:hover .product__img img{ transform:scale(1.05); filter:saturate(1) brightness(1); }
+.product__tag{
+  position:absolute; top:14px; left:14px; z-index:2;
+  font-size:10px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--ink); padding:6px 10px;
+  background:rgba(10,18,24,.7); backdrop-filter:blur(6px);
+  border:1px solid var(--line-2);
+}
+.product__info{
+  margin-top:18px;
+  display:flex; justify-content:space-between; align-items:flex-start; gap:16px;
+}
+.product__info h3{ font-family:var(--serif); font-weight:400; font-size:18px; line-height:1.3; }
+.product__info small{
+  display:block; font-size:11px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--ink-soft); margin-top:4px;
+}
+.product__price{
+  font-family:var(--serif); font-style:italic;
+  font-size:18px; color:var(--gold); white-space:nowrap;
+}
+
+.biblioteca__foot{
+  text-align:center; margin-top:64px;
+  display:flex; flex-direction:column; align-items:center; gap:18px;
+}
+.biblioteca__foot small{
+  font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--ink-soft);
+}
+
+/* =========================================================
+   VIDEOS
+   ========================================================= */
+.videos__filters{
+  display:flex; gap:10px; flex-wrap:wrap; margin-bottom:48px;
+}
+.chip{
+  font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  padding:10px 18px; border-radius:999px;
+  border:1px solid var(--line); color:var(--ink-mute);
+  transition:all var(--fast);
+}
+.chip:hover, .chip.is-active{
+  background:var(--ink); color:var(--bg); border-color:var(--ink);
+}
+
+.video-grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+}
+@media (max-width:900px){ .video-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:600px){ .video-grid{ grid-template-columns:1fr; } }
+
+.vcard{ position:relative; cursor:pointer; }
+.vcard__thumb{
+  position:relative; aspect-ratio:16/10;
+  overflow:hidden; border-radius:2px; background:var(--bg-3);
+}
+.vcard__thumb img{
+  width:100%; height:100%; object-fit:cover;
+  filter:brightness(.6) contrast(1.05);
+  transition:transform 1.2s var(--ease-out), filter var(--med);
+}
+.vcard:hover .vcard__thumb img{ transform:scale(1.06); filter:brightness(.75); }
+.vcard__thumb::before{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, transparent 60%, rgba(10,18,24,.7));
+  z-index:1;
+}
+.vcard__play{
+  position:absolute; left:50%; top:50%;
+  width:64px; height:64px; border-radius:50%;
+  background:rgba(237,230,214,.12);
+  border:1px solid rgba(237,230,214,.3);
+  backdrop-filter:blur(8px);
+  transform:translate(-50%,-50%) scale(.9);
+  display:flex; align-items:center; justify-content:center; z-index:2;
+  transition:transform var(--med), background var(--med);
+}
+.vcard:hover .vcard__play{ transform:translate(-50%,-50%) scale(1); background:rgba(232,185,107,.2); border-color:var(--gold); }
+.vcard__play::before{
+  content:""; width:0; height:0;
+  border-left:14px solid var(--ink);
+  border-top:9px solid transparent; border-bottom:9px solid transparent;
+  margin-left:4px;
+}
+.vcard__meta{
+  position:absolute; bottom:14px; left:16px; right:16px; z-index:2;
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:10px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--ink-mute);
+}
+.vcard__cat{ color:var(--gold); }
+.vcard h3{
+  margin-top:18px;
+  font-family:var(--serif); font-weight:300; font-size:22px;
+  line-height:1.2; letter-spacing:-.005em;
+}
+.vcard p{ margin-top:6px; font-size:13px; color:var(--ink-soft); line-height:1.5; }
+
+/* =========================================================
+   EXPLORE MAIS (grid of cards → internal pages)
+   ========================================================= */
+.universes{
+  display:grid; grid-template-columns:repeat(4, 1fr);
+  grid-auto-rows:1fr; gap:18px;
+}
+.uni{
+  position:relative; overflow:hidden; border-radius:2px;
+  background:var(--bg-3); aspect-ratio:4/5;
+  cursor:pointer; isolation:isolate; transition:transform var(--med);
+  display:block;
+}
+.uni:hover{ transform:translateY(-3px); }
+.uni__bg{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; filter:brightness(.78) saturate(.92);
+  transition:transform 1.8s var(--ease-out), filter var(--med); z-index:0;
+}
+.uni:hover .uni__bg{ transform:scale(1.05); filter:brightness(.9) saturate(1); }
+.uni::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, transparent 35%, rgba(10,18,24,.55) 65%, rgba(10,18,24,.92) 100%);
+  pointer-events:none; z-index:1;
+}
+.uni__num{
+  position:absolute; top:20px; left:22px; z-index:2;
+  font-family:var(--serif); font-style:italic; font-size:13px;
+  color:rgba(237,230,214,.55); letter-spacing:.06em;
+}
+.uni__caption{
+  position:absolute; left:0; right:0; bottom:0; z-index:2;
+  padding:26px 26px 24px;
+  display:flex; flex-direction:column; gap:18px;
+}
+.uni__caption h3{
+  font-family:var(--serif); font-weight:300; font-size:26px;
+  line-height:1.08; letter-spacing:-.005em; color:var(--ink); margin:0;
+}
+.uni__caption h3 em{ font-style:italic; }
+.uni__caption p{
+  font-size:13px; color:rgba(237,230,214,.65);
+  line-height:1.55; max-width:36ch; margin:0;
+}
+.uni__cta{
+  display:inline-flex; align-items:center; gap:14px;
+  font-size:11px; font-weight:500; letter-spacing:.32em; text-transform:uppercase;
+  color:rgba(237,230,214,.7); transition:color var(--med), gap var(--med);
+}
+.uni__cta::before{
+  content:""; width:24px; height:1px; background:rgba(237,230,214,.55);
+  transition:width var(--med), background var(--med);
+}
+.uni:hover .uni__cta{ color:var(--ink); gap:18px; }
+.uni:hover .uni__cta::before{ width:36px; background:var(--gold); }
+
+@media (max-width:1080px){
+  .universes{ grid-template-columns:repeat(2, 1fr); }
+}
+@media (max-width:680px){
+  .universes{ grid-template-columns:1fr; gap:14px; }
+  .uni__caption{ padding:22px 20px 20px; }
+  .uni__caption h3{ font-size:22px; }
+}
+
+/* =========================================================
+   CTA STRIP
+   ========================================================= */
+.cta-strip{
+  position:relative; padding:clamp(100px, 18vh, 200px) var(--gut);
+  text-align:center; overflow:hidden; isolation:isolate;
+}
+.cta-strip__bg{ position:absolute; inset:0; z-index:-2; }
+.cta-strip__bg img{
+  width:100%; height:100%; object-fit:cover;
+  filter:brightness(.45) contrast(1.05);
+  animation:kenburns 30s ease-in-out infinite alternate;
+}
+.cta-strip::before{
+  content:""; position:absolute; inset:0; z-index:-1;
+  background:radial-gradient(60% 60% at 50% 50%, transparent 0%, rgba(10,18,24,.85) 100%);
+}
+.cta-strip h2{
+  font-family:var(--serif); font-weight:300;
+  font-size:clamp(36px, 6vw, 80px);
+  line-height:1; letter-spacing:-.015em;
+  max-width:18ch; margin:0 auto 24px;
+}
+.cta-strip h2 em{ font-style:italic; color:var(--amber); }
+.cta-strip p{
+  max-width:46ch; margin:0 auto 40px;
+  color:var(--ink-mute); font-size:15px;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer{
+  background:var(--bg); border-top:1px solid var(--line);
+  padding:80px var(--gut) 40px;
+}
+.foot{
+  max-width:var(--maxw); margin:0 auto;
+  display:grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap:48px;
+}
+@media (max-width:880px){ .foot{ grid-template-columns:1fr 1fr; } }
+@media (max-width:520px){ .foot{ grid-template-columns:1fr; } }
+
+.foot__brand{ display:flex; flex-direction:column; gap:20px; }
+.foot__brand img{
+  height:100px; width:auto; align-self:flex-start;
+}
+.foot__brand p{
+  font-family:var(--serif); font-style:italic;
+  color:var(--ink-mute); font-size:14px; line-height:1.6; max-width:32ch;
+}
+.foot__col h5{
+  font-size:11px; letter-spacing:.28em; text-transform:uppercase;
+  color:var(--ink-soft); margin-bottom:18px; font-weight:500;
+}
+.foot__col a{
+  display:block; padding:6px 0;
+  font-family:var(--serif); font-size:15px; color:var(--ink);
+  transition:color var(--fast), padding var(--fast);
+}
+.foot__col a:hover{ color:var(--gold); padding-left:6px; }
+
+.foot__bot{
+  max-width:var(--maxw); margin:64px auto 0;
+  padding-top:24px; border-top:1px solid var(--line);
+  display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft);
+}
+.foot__bot a:hover{ color:var(--ink); }
+
+/* =========================================================
+   MOBILE FLOATING CTA
+   ========================================================= */
+.float-cta{
+  position:fixed; right:20px; bottom:20px; z-index:90;
+  background:var(--gold); color:var(--bg);
+  border-radius:999px; padding:14px 22px;
+  font-family:var(--sans); font-size:11px; font-weight:700;
+  letter-spacing:.22em; text-transform:uppercase;
+  box-shadow:0 8px 24px rgba(0,0,0,.45);
+  display:none; align-items:center; gap:10px;
+  transition:transform var(--fast), background var(--fast);
+}
+.float-cta:hover{ transform:translateY(-2px); background:var(--amber); }
+.float-cta .arrow{
+  display:inline-block; width:14px; height:1px; background:currentColor; position:relative;
+}
+.float-cta .arrow::after{
+  content:""; position:absolute; right:0; top:-3px; width:7px; height:7px;
+  border-top:1px solid currentColor; border-right:1px solid currentColor;
+  transform:rotate(45deg);
+}
+@media (max-width:920px){
+  .float-cta.is-visible{ display:inline-flex; }
+}
+
+@media (max-width:600px){
+  .section__head{ margin-bottom:48px; gap:24px; }
+  .timeline__cell{ padding:24px 20px; }
+  .hero__sub{ font-size:14px; }
+  .btn{ padding:16px 24px; font-size:11px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
   }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Manrope",system-ui,sans-serif;font-size:15px;line-height:1.55}
-  h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:500;margin:0;letter-spacing:-.01em}
-  a{color:var(--gold)}
-  .hidden{display:none!important}
-  .wrap{max-width:1080px;margin:0 auto;padding:32px 28px 80px}
-
-  /* login */
-  .login{min-height:100vh;display:grid;place-items:center;padding:24px}
-  .login-card{width:100%;max-width:380px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:36px 32px}
-  .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-  .login-card h1{font-size:27px;margin:6px 0 26px}
-
-  /* header */
-  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px}
-  .top .brand{font-family:"Fraunces",serif;font-size:22px}
-  .top .brand span{color:var(--muted);font-size:13px;font-family:"Manrope";letter-spacing:.14em;text-transform:uppercase;margin-left:8px}
-
-  /* metrics */
-  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:26px}
-  .metric{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
-  .metric .label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-  .metric .value{font-family:"Fraunces",serif;font-size:28px;margin-top:8px;font-variant-numeric:tabular-nums}
-
-  /* card / table */
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
-  .card h2{font-size:19px;margin-bottom:16px}
-  table{width:100%;border-collapse:collapse;font-size:14px}
-  th{text-align:left;font-weight:500;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:0 12px 12px;border-bottom:1px solid var(--line)}
-  td{padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
-  tr:last-child td{border-bottom:none}
-  tbody tr:hover{background:var(--panel-2)}
-  .mono{font-variant-numeric:tabular-nums}
-  .muted{color:var(--muted)}
-
-  .badge{display:inline-block;padding:3px 11px;border-radius:999px;font-size:12px;font-weight:500}
-  .badge.ok{background:var(--ok-bg);color:var(--ok-ink)}
-  .badge.warn{background:var(--warn-bg);color:var(--warn-ink)}
-
-  /* controls */
-  .toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
-  .spacer{flex:1}
-  input,select{font:inherit;font-size:14px;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:10px 12px}
-  input:focus,select:focus{outline:none;border-color:var(--gold)}
-  .field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
-  .field label{font-size:13px;font-weight:500}
-  .row{display:flex;gap:12px;flex-wrap:wrap}
-  .row>.field{flex:1;min-width:150px}
-  .row>.field input,.row>.field select{width:100%}
-
-  .btn{border:none;cursor:pointer;font:inherit;font-weight:600;font-size:14px;padding:10px 18px;border-radius:9px;transition:opacity .15s,background .15s}
-  .btn.gold{background:var(--gold);color:var(--gold-ink)}
-  .btn.gold:hover{opacity:.9}
-  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
-  .btn.ghost:hover{border-color:var(--muted)}
-  .btn.small{padding:6px 12px;font-size:13px;font-weight:500}
-  .btn.danger{background:transparent;color:var(--danger);border:1px solid #3a2622}
-  .btn:disabled{opacity:.5;cursor:not-allowed}
-
-  .alert{background:#2c1b18;color:var(--danger);padding:10px 14px;border-radius:9px;font-size:13px;margin-bottom:16px}
-  .empty{text-align:center;color:var(--muted);padding:44px 20px}
-  .acts{text-align:right;white-space:nowrap}
+  .hero__media img{ animation:none; transform:none; }
+}
 </style>
 </head>
 <body>
 
-<!-- ============ LOGIN ============ -->
-<div id="login" class="login">
-  <div class="login-card">
-    <div class="eyebrow">Sua Própria Trilha</div>
-    <h1>Painel</h1>
-    <div id="login-error" class="alert hidden"></div>
-    <div class="field">
-      <label for="email">E-mail</label>
-      <input id="email" type="email" autocomplete="username" />
-    </div>
-    <div class="field">
-      <label for="password">Senha</label>
-      <input id="password" type="password" autocomplete="current-password" />
-    </div>
-    <button id="login-btn" class="btn gold" style="width:100%">Entrar</button>
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a class="nav__brand" href="#top" aria-label="Sua Própria Trilha">
+    <img class="nav__logo" src="/assets/logo-mark.png" alt="Sua Própria Trilha">
+    <span class="nav__name">Sua Própria Trilha<small>desde 2025 · <em>brasil</em></small></span>
+  </a>
+  <div class="nav__menu">
+    <a class="nav__link" href="#manifesto">Manifesto</a>
+    <a class="nav__link" href="#wex">A história</a>
+    <a class="nav__link" href="/metodo/" target="_top">O Método</a>
+    <a class="nav__link" href="/silence-summit/" target="_top">Silence &amp; Summit</a>
+    <a class="nav__link" href="#biblioteca">Biblioteca</a>
+    <a class="nav__link" href="#videos">Vídeos</a>
+    <a class="nav__link" href="#explore">Explore</a>
   </div>
+  <a class="nav__cta" href="#biblioteca"><span>Biblioteca</span><span class="nav__cta-sub">13 livros</span></a>
+  <button class="nav__burger" id="burger" aria-label="Abrir menu"><span></span><span></span></button>
+</nav>
+
+<div class="mmenu" id="mmenu">
+  <small>Menu</small>
+  <a href="#manifesto">Manifesto</a>
+  <a href="#wex">A história</a>
+  <a href="/metodo/" target="_top">O Método</a>
+  <a href="/silence-summit/" target="_top">Silence &amp; Summit</a>
+  <a href="#biblioteca">Biblioteca</a>
+  <a href="#videos">Vídeos</a>
+  <a href="#explore">Explore</a>
+  <a href="/livros/" target="_top">Todos os livros</a>
 </div>
 
-<!-- ============ APP ============ -->
-<div id="app" class="wrap hidden">
-  <div class="top">
-    <div class="brand">Sua Própria Trilha<span>Admin</span></div>
-    <button id="logout-btn" class="btn ghost small">Sair</button>
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero__media">
+    <img src="/assets/hero.jpg" alt="Serra ao amanhecer, neblina entre cumes">
   </div>
 
-  <div class="metrics">
-    <div class="metric"><div class="label">Receita</div><div id="m-receita" class="value">—</div></div>
-    <div class="metric"><div class="label">Vendas pagas</div><div id="m-pagas" class="value">—</div></div>
-    <div class="metric"><div class="label">Pendentes</div><div id="m-pendentes" class="value">—</div></div>
-    <div class="metric"><div class="label">Total</div><div id="m-total" class="value">—</div></div>
-  </div>
-
-  <div class="toolbar">
-    <input id="q" type="text" placeholder="Buscar por e-mail…" style="min-width:240px" />
-    <select id="status-filter">
-      <option value="all">Todos os status</option>
-      <option value="paid">Pagas</option>
-      <option value="pending">Pendentes</option>
-    </select>
-    <div class="spacer"></div>
-    <button id="grant-toggle" class="btn gold">+ Liberar acesso manual</button>
-  </div>
-
-  <div id="grant" class="card hidden" style="margin-bottom:20px">
-    <h2>Liberar acesso manual</h2>
-    <p class="muted" style="margin-top:-8px;margin-bottom:16px">Cria uma compra marcada como paga — para cortesias ou pagamentos que travaram.</p>
-    <div id="grant-error" class="alert hidden"></div>
-    <div class="row">
-      <div class="field"><label>E-mail do cliente</label><input id="g-email" type="email" /></div>
-      <div class="field"><label>Livro</label><select id="g-livro"><option value="">Selecione…</option></select></div>
-      <div class="field"><label>Valor (opcional)</label><input id="g-valor" type="number" step="0.01" min="0" placeholder="0,00" /></div>
-    </div>
-    <div class="row" style="margin-top:4px">
-      <button id="grant-save" class="btn gold" style="flex:none">Liberar acesso</button>
-      <button id="grant-cancel" class="btn ghost" style="flex:none">Cancelar</button>
+  <div class="hero__seal" aria-hidden="true">
+    <div class="hero__seal__circle">
+      <img src="/assets/logo-mark.png" alt="">
     </div>
   </div>
 
-  <div class="card">
-    <h2>Compras</h2>
-    <div id="table-area"></div>
+  <div class="hero__coords">
+    <span>Serra do Cipó · Travessão · MG</span>
+    <span>Amanhecer · 06:14</span>
   </div>
+
+  <div class="hero__content">
+    <p class="eyebrow hero__eyebrow">Capítulo I  ·  O chamado</p>
+    <h1 class="hero__title">
+      <span>Algumas pessoas esperam</span>
+      <span>o destino. Outras criam</span>
+      <span><em>a própria trilha.</em></span>
+    </h1>
+    <p class="hero__sub">
+      Um movimento sobre recomeço, disciplina e reconstrução.
+      Aqui não há atalho. Há montanha, neblina, fogueira e o silêncio que devolve a clareza.
+    </p>
+    <div class="hero__actions">
+      <a class="btn btn--primary" href="#biblioteca">Conhecer a biblioteca <span class="arrow"></span></a>
+      <a class="btn btn--ghost" href="#wex">Saber quem está por trás</a>
+    </div>
+  </div>
+
+  <div class="hero__scroll">role para descer · ↓</div>
+</section>
+
+<!-- MANIFESTO (short) -->
+<section class="pull" id="manifesto">
+  <div class="shell">
+    <p class="eyebrow"><span class="section-num">02</span> &nbsp; Manifesto</p>
+    <blockquote class="reveal">
+      Não há atalho. Há trilha.<br>
+      E ninguém vai <em>caminhar a sua por você.</em>
+    </blockquote>
+    <cite>do manifesto · <a href="/manifesto/" target="_top">ler completo →</a></cite>
+  </div>
+</section>
+
+<!-- BRAND DIVIDER -->
+<div class="brand-mark">
+  <img src="/assets/logo.png" alt="Sua Própria Trilha">
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- A HISTÓRIA (Wex) -->
+<section class="section section--soft" id="wex">
+  <div class="shell">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow"><span class="section-num">03</span> &nbsp; A história</p>
+        <h2 class="section__title">Quem caminha à frente <em>já caminhou</em> de joelhos.</h2>
+      </div>
+      <p class="section__lede">
+        Wex não é um personagem. É a soma das quedas, dos recomeços e das madrugadas frias em que ele decidiu não desistir. Esta é a parte da história que ninguém posta.
+      </p>
+    </div>
+
+    <div class="story">
+      <figure class="story__media reveal">
+        <img src="/assets/ref-wex.jpg" alt="Wex em close, na mata ao amanhecer" loading="lazy">
+        <figcaption class="story__caption">Wex · antes do amanhecer, 2025</figcaption>
+      </figure>
+
+      <div class="story__body reveal delay-2">
+        <p>Começou simples. Um sonho, uma caderneta, um par de tênis e a teimosia de quem nasceu sem rede de proteção. <strong>Construiu, vendeu, errou, acertou e construiu de novo.</strong> Ergueu empresas, virou referência, viu o nome em cima de portas.</p>
+        <p>Até que chegou a noite em que o telefone parou de tocar. Em poucos meses, a conta zerou. Os contratos saíram. Pessoas que diziam "irmão" sumiram. Restou um homem, uma cadeira e um teto que parecia muito maior do que antes.</p>
+        <p>Foi a montanha que o pegou de volta. Não como metáfora. <strong>Como rotina</strong>. Subir antes do sol, sentir o frio na cara, ouvir o passo no cascalho e descobrir que o silêncio também ensina. Cada cume devolveu uma parte do que ele havia perdido. Menos uma: a vontade de viver para parecer grande aos outros.</p>
+        <p>Dali nasceu o que você está lendo. <strong>Sua Própria Trilha</strong> não é coach, não é curso, não é fórmula. É o registro honesto de alguém que reconstruiu. E a mão estendida para quem está reconstruindo agora.</p>
+        <div class="story__signature">
+          <span class="script">Wex</span>
+          <small>Fundador · Sua Própria Trilha</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="timeline__cell">
+        <span class="num">01 / Origem</span>
+        <h4>O começo simples</h4>
+        <p>Interior, gráfica pequena, primeiro CNPJ aos 18. Aprendeu a vender antes de aprender a respirar.</p>
+      </div>
+      <div class="timeline__cell">
+        <span class="num">02 / Ascensão</span>
+        <h4>O auge silencioso</h4>
+        <p>Empresas crescendo, time montado, números que pareciam roteiro. A vida em alta velocidade.</p>
+      </div>
+      <div class="timeline__cell">
+        <span class="num">03 / Queda</span>
+        <h4>A noite mais longa</h4>
+        <p>Crise, perdas, ausências. O dia em que tudo o que parecia firme virou vento.</p>
+      </div>
+      <div class="timeline__cell">
+        <span class="num">04 / Trilha</span>
+        <h4>O recomeço a pé</h4>
+        <p>Montanhas, disciplina, escrita, comunidade. A reconstrução que ninguém vê. E que muda tudo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIBLIOTECA -->
+<section class="section section--deep" id="biblioteca">
+  <div class="shell">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow"><span class="section-num">04</span> &nbsp; Biblioteca</p>
+        <h2 class="section__title">Treze livros. <em>Uma travessia.</em></h2>
+      </div>
+      <p class="section__lede">
+        Não foram pensados numa escrivaninha. Foram pensados em cumeeiras, fogueiras e madrugadas frias. Cada um é uma etapa da mesma reconstrução.
+      </p>
+    </div>
+
+    <div class="products">
+      <a class="product reveal" href="/livros/sua-propria-trilha/" target="_top">
+        <div class="product__img">
+          <span class="product__tag">Manifesto</span>
+          <img src="/assets/book-1.jpg" alt="Capa: Sua Própria Trilha" loading="lazy">
+        </div>
+        <div class="product__info">
+          <div>
+            <h3>Sua Própria Trilha</h3>
+            <small>A montanha interior</small>
+          </div>
+          <span class="product__price">R$ 37</span>
+        </div>
+      </a>
+
+      <a class="product reveal delay-1" href="/livros/o-primeiro-passo-e-acreditar/" target="_top">
+        <div class="product__img">
+          <img src="/assets/book-2.jpg" alt="Capa: O Primeiro Passo é Acreditar" loading="lazy">
+        </div>
+        <div class="product__info">
+          <div>
+            <h3>O Primeiro Passo é Acreditar</h3>
+            <small>Volume I · Trilogia</small>
+          </div>
+          <span class="product__price">R$ 27</span>
+        </div>
+      </a>
+
+      <a class="product reveal delay-2" href="/livros/de-onde-a-trilha-me-levar/" target="_top">
+        <div class="product__img">
+          <img src="/assets/book-3.jpg" alt="Capa: De onde a Trilha me Levar" loading="lazy">
+        </div>
+        <div class="product__info">
+          <div>
+            <h3>De onde a Trilha me Levar</h3>
+            <small>Volume II · Trilogia</small>
+          </div>
+          <span class="product__price">R$ 27</span>
+        </div>
+      </a>
+
+      <a class="product reveal delay-3" href="/livros/onde-a-noite-me-levou/" target="_top">
+        <div class="product__img">
+          <span class="product__tag">Travessia</span>
+          <img src="/assets/book-4.jpg" alt="Capa: Onde a Noite me Levou" loading="lazy">
+        </div>
+        <div class="product__info">
+          <div>
+            <h3>Onde a Noite me Levou</h3>
+            <small>Pico do Papagaio · inverno</small>
+          </div>
+          <span class="product__price">R$ 27</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="biblioteca__foot reveal">
+      <small>Mais 9 títulos te esperando</small>
+      <a class="btn btn--ghost" href="/livros/" target="_top">Ver biblioteca completa <span class="arrow"></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section class="section section--soft" id="videos">
+  <div class="shell">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow"><span class="section-num">05</span> &nbsp; Documentário contínuo</p>
+        <h2 class="section__title">Histórias que <em>se vêem</em> com os pés.</h2>
+      </div>
+      <p class="section__lede">
+        Episódios curtos. Imagem em câmera lenta, voz em primeira pessoa, sem trilha grandiosa. Documentário, não conteúdo.
+      </p>
+    </div>
+
+    <div class="videos__filters reveal">
+      <button class="chip is-active">Todos</button>
+      <button class="chip">Recomeço</button>
+      <button class="chip">Disciplina</button>
+      <button class="chip">Montanha</button>
+      <button class="chip">Silêncio</button>
+      <button class="chip">Propósito</button>
+    </div>
+
+    <div class="video-grid">
+      <a class="vcard reveal" href="https://www.youtube.com/watch?v=YclZyt_mLs8" target="_blank" rel="noopener" style="color:inherit;">
+        <div class="vcard__thumb">
+          <img src="https://img.youtube.com/vi/YclZyt_mLs8/maxresdefault.jpg" alt="O dia em que parei de avisar — Sua Própria Trilha" loading="lazy">
+          <span class="vcard__play"></span>
+          <div class="vcard__meta"><span class="vcard__cat">Recomeço</span><span>14:22</span></div>
+        </div>
+        <h3>O dia em que parei de avisar.</h3>
+        <p>Sobre recomeçar em silêncio, sem público, sem desculpas.</p>
+      </a>
+      <a class="vcard reveal delay-1" href="https://www.youtube.com/watch?v=csF5Ufsz6r0" target="_blank" rel="noopener" style="color:inherit;">
+        <div class="vcard__thumb">
+          <img src="https://img.youtube.com/vi/csF5Ufsz6r0/maxresdefault.jpg" alt="My Way — tradução narrada · Sua Própria Trilha" loading="lazy">
+          <span class="vcard__play"></span>
+          <div class="vcard__meta"><span class="vcard__cat">Propósito</span></div>
+        </div>
+        <h3>My Way — uma tradução narrada.</h3>
+        <p>A canção que virou manifesto: escolhas, coragem e viver a própria rota, sem arrependimentos.</p>
+      </a>
+      <a class="vcard reveal delay-2" href="https://www.youtube.com/watch?v=dIxllJasTh8" target="_blank" rel="noopener" style="color:inherit;">
+        <div class="vcard__thumb">
+          <img src="https://img.youtube.com/vi/dIxllJasTh8/maxresdefault.jpg" alt="The Climb — tradução narrada · Sua Própria Trilha" loading="lazy">
+          <span class="vcard__play"></span>
+          <div class="vcard__meta"><span class="vcard__cat">Disciplina</span></div>
+        </div>
+        <h3>The Climb — uma tradução narrada.</h3>
+        <p>A subida que ensina: a jornada importa tanto quanto o cume. Sobre perseverar mesmo diante da dificuldade.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- EXPLORE MAIS -->
+<section class="section section--deep" id="explore">
+  <div class="shell">
+    <div class="section__head">
+      <div>
+        <p class="eyebrow"><span class="section-num">06</span> &nbsp; Explore mais</p>
+        <h2 class="section__title">A trilha <em>se desdobra.</em></h2>
+      </div>
+      <p class="section__lede">
+        Quatro caminhos paralelos. Cada um vive em sua própria página, no seu próprio ritmo. Entre por onde fizer sentido pra você hoje.
+      </p>
+    </div>
+
+    <div class="universes">
+      <a href="/manifesto/" target="_top" class="uni reveal">
+        <img class="uni__bg" src="/assets/trilha-hero.jpg" alt="Manifesto" loading="lazy">
+        <span class="uni__num">01</span>
+        <div class="uni__caption">
+          <h3>Manifesto <em>completo</em></h3>
+          <p>A filosofia que move o movimento. Sete princípios. Um chamado.</p>
+          <span class="uni__cta">ler completo</span>
+        </div>
+      </a>
+
+      <a href="/livros/" target="_top" class="uni reveal delay-1">
+        <img class="uni__bg" src="/ebooks-cover.jpg?v=3" alt="E-books de Wex Servilieri" loading="lazy">
+        <span class="uni__num">02</span>
+        <div class="uni__caption">
+          <h3>Biblioteca</h3>
+          <p>Treze e-books de recomeço, disciplina e reconstrução.</p>
+          <span class="uni__cta">explorar</span>
+        </div>
+      </a>
+
+      <a href="/palestras/" target="_top" class="uni reveal delay-2">
+        <img class="uni__bg" src="/assets/talks.jpg" alt="Palestras &amp; Mentorias" loading="lazy">
+        <span class="uni__num">03</span>
+        <div class="uni__caption">
+          <h3>Palestras &amp; <em>mentorias</em></h3>
+          <p>Para empresas, conselhos e times que decidem em terreno inclinado.</p>
+          <span class="uni__cta">saber mais</span>
+        </div>
+      </a>
+
+      <article class="uni reveal delay-3">
+        <img class="uni__bg" src="/assets/noite.jpg" alt="A Cabana" loading="lazy">
+        <span class="uni__num">04</span>
+        <div class="uni__caption">
+          <h3>A Cabana</h3>
+          <p>Travessias reais com pessoas reais. Sem palco, com fogueira.</p>
+          <span class="uni__cta">em breve</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<section class="cta-strip">
+  <div class="cta-strip__bg">
+    <img src="/assets/hero.jpg" alt="">
+  </div>
+  <div class="shell">
+    <p class="eyebrow" style="justify-content:center; margin-bottom:24px;">a chamada</p>
+    <h2 class="reveal">A trilha existe. <em>Falta o seu primeiro passo.</em></h2>
+    <p class="reveal delay-1">Você não precisa estar pronto. Precisa começar.</p>
+    <div style="display:flex; gap:18px; justify-content:center; flex-wrap:wrap;">
+      <a class="btn btn--primary reveal delay-2" href="#biblioteca">Começar pela biblioteca <span class="arrow"></span></a>
+      <a class="btn btn--ghost reveal delay-3" href="/manifesto/" target="_top">Ler o manifesto</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot">
+    <div class="foot__brand">
+      <img src="/assets/logo.png" alt="Sua Própria Trilha">
+      <p>Um lugar para respirar, refletir e reconstruir a própria vida. No seu ritmo, no seu compasso.</p>
+      <small style="font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--ink-soft);">www.suapropriatrilha.com.br</small>
+    </div>
+    <div class="foot__col">
+      <h5>A trilha</h5>
+      <a href="#manifesto">Manifesto</a>
+      <a href="#wex">A história</a>
+      <a href="#biblioteca">Biblioteca</a>
+      <a href="#videos">Vídeos</a>
+    </div>
+    <div class="foot__col">
+      <h5>Universos</h5>
+      <a href="/livros/" target="_top">E-books</a>
+      <a href="/manifesto/" target="_top">Manifesto completo</a>
+      <a href="/palestras/" target="_top">Palestras &amp; Mentorias</a>
+      <a href="#explore">A Cabana</a>
+    </div>
+    <div class="foot__col">
+      <h5>Conexão</h5>
+      <a href="mailto:contato@suapropriatrilha.com.br">contato@suapropriatrilha.com.br</a>
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Spotify</a>
+    </div>
+  </div>
+  <div class="foot__bot">
+    <span>© 2026 Sua Própria Trilha · Todos os direitos reservados</span>
+    <span>Foto principal: Serra do Cipó (MG) · Acervo editorial</span>
+    <span><a href="#">Política de privacidade</a> · <a href="#">Termos</a></span>
+  </div>
+</footer>
+
+<!-- Floating CTA (mobile only) -->
+<a class="float-cta" id="floatCta" href="#biblioteca">
+  Ver biblioteca <span class="arrow"></span>
+</a>
+
 <script>
-/* ===================== CONFIGURAÇÃO ===================== */
-/* A URL já é a sua. A ANON KEY é pública (pode ficar aqui no arquivo).
-   Pegue em: Supabase > Project Settings > API > Project API keys > "anon public". */
-const SUPABASE_URL = "https://zrfpkavzhjxqdbfndlkr.supabase.co";
-const SUPABASE_ANON_KEY = "COLE_AQUI_SUA_ANON_KEY";
-/* ======================================================= */
+const nav = document.getElementById('nav');
+const floatCta = document.getElementById('floatCta');
+const onScroll = () => {
+  nav.classList.toggle('is-scrolled', window.scrollY > 40);
+  if (floatCta) floatCta.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.8);
+};
+onScroll();
+window.addEventListener('scroll', onScroll, { passive:true });
 
-const PAGOS = ["paid","approved","pago","aprovado","completed"];
-const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const burger = document.getElementById('burger');
+const mmenu  = document.getElementById('mmenu');
+burger?.addEventListener('click', () => mmenu.classList.toggle('is-open'));
+mmenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mmenu.classList.remove('is-open')));
 
-const $ = (id) => document.getElementById(id);
-const brl = (v) => new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(v)||0);
-const dataBR = (iso) => iso ? new Date(iso).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}) : "—";
-
-let COMPRAS = [];
-let LIVROS = [];
-
-function showError(el, msg){ el.textContent = msg; el.classList.remove("hidden"); }
-function hide(el){ el.classList.add("hidden"); }
-function show(el){ el.classList.remove("hidden"); }
-
-/* ---------- Auth ---------- */
-async function checkSession(){
-  const { data } = await sb.auth.getSession();
-  if (data.session) enterApp(); else { hide($("app")); show($("login")); }
-}
-
-async function login(){
-  hide($("login-error"));
-  const email = $("email").value.trim();
-  const password = $("password").value;
-  $("login-btn").disabled = true;
-  const { error } = await sb.auth.signInWithPassword({ email, password });
-  $("login-btn").disabled = false;
-  if (error){ showError($("login-error"), "E-mail ou senha incorretos."); return; }
-  enterApp();
-}
-
-async function logout(){ await sb.auth.signOut(); hide($("app")); show($("login")); }
-
-async function enterApp(){
-  hide($("login")); show($("app"));
-  await loadData();
-}
-
-/* ---------- Dados ---------- */
-async function loadData(){
-  const [{ data: compras }, { data: livros }] = await Promise.all([
-    sb.from("compras").select("id,email,livro_slug,payment_id,status,valor,metodo,criado_em").order("criado_em",{ascending:false}).limit(1000),
-    sb.from("livros").select("slug,titulo").order("titulo"),
-  ]);
-  COMPRAS = compras || [];
-  LIVROS = livros || [];
-  renderMetrics();
-  renderLivroOptions();
-  renderTable();
-}
-
-function renderMetrics(){
-  const pagas = COMPRAS.filter(c => PAGOS.includes(c.status));
-  const receita = pagas.reduce((s,c)=>s+(Number(c.valor)||0),0);
-  const pendentes = COMPRAS.filter(c => c.status === "pending").length;
-  $("m-receita").textContent = brl(receita);
-  $("m-pagas").textContent = pagas.length;
-  $("m-pendentes").textContent = pendentes;
-  $("m-total").textContent = COMPRAS.length;
-}
-
-function renderLivroOptions(){
-  const sel = $("g-livro");
-  sel.innerHTML = '<option value="">Selecione…</option>' +
-    LIVROS.map(l => `<option value="${l.slug}">${escapeHtml(l.titulo)}</option>`).join("");
-}
-
-function currentFilter(){
-  const q = $("q").value.trim().toLowerCase();
-  const sf = $("status-filter").value;
-  return COMPRAS.filter(c => {
-    const okQ = q ? (c.email||"").toLowerCase().includes(q) : true;
-    const okS = sf === "all" ? true : sf === "paid" ? PAGOS.includes(c.status) : c.status === "pending";
-    return okQ && okS;
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); }
   });
-}
+}, { rootMargin:'0px 0px -10% 0px', threshold:.05 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-function renderTable(){
-  const rows = currentFilter();
-  const area = $("table-area");
-  if (!rows.length){ area.innerHTML = '<div class="empty">Nenhuma compra encontrada.</div>'; return; }
-  area.innerHTML = `
-    <table>
-      <thead><tr>
-        <th>E-mail</th><th>Livro</th><th>Valor</th><th>Método</th><th>Status</th><th>Data</th><th class="acts">Ações</th>
-      </tr></thead>
-      <tbody>
-        ${rows.map(c => {
-          const pago = PAGOS.includes(c.status);
-          return `<tr>
-            <td>${escapeHtml(c.email||"")}</td>
-            <td class="muted">${escapeHtml(c.livro_slug||"")}</td>
-            <td class="mono">${brl(c.valor)}</td>
-            <td class="muted">${escapeHtml(c.metodo||"—")}</td>
-            <td><span class="badge ${pago?"ok":"warn"}">${escapeHtml(c.status)}</span></td>
-            <td class="muted mono">${dataBR(c.criado_em)}</td>
-            <td class="acts">
-              <button class="btn ghost small" data-act="${pago?"pend":"pay"}" data-id="${c.id}">${pago?"Tornar pendente":"Marcar paga"}</button>
-              <button class="btn danger small" data-act="del" data-id="${c.id}">Excluir</button>
-            </td>
-          </tr>`;
-        }).join("")}
-      </tbody>
-    </table>`;
-}
-
-function escapeHtml(s){ return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m])); }
-
-/* ---------- Ações ---------- */
-async function setStatus(id, status){
-  await sb.from("compras").update({ status }).eq("id", id);
-  await loadData();
-}
-async function delCompra(id){
-  if (!confirm("Excluir esta compra?")) return;
-  await sb.from("compras").delete().eq("id", id);
-  await loadData();
-}
-async function liberarAcesso(){
-  hide($("grant-error"));
-  const email = $("g-email").value.trim().toLowerCase();
-  const slug = $("g-livro").value;
-  const valor = parseFloat($("g-valor").value) || 0;
-  if (!email || !slug){ showError($("grant-error"), "Informe o e-mail e selecione o livro."); return; }
-  $("grant-save").disabled = true;
-  const { error } = await sb.from("compras").insert({ email, livro_slug: slug, status:"paid", metodo:"manual", valor });
-  $("grant-save").disabled = false;
-  if (error){ showError($("grant-error"), error.message); return; }
-  $("g-email").value=""; $("g-livro").value=""; $("g-valor").value="";
-  hide($("grant"));
-  await loadData();
-}
-
-/* ---------- Eventos ---------- */
-$("login-btn").addEventListener("click", login);
-$("password").addEventListener("keydown", e => { if(e.key==="Enter") login(); });
-$("logout-btn").addEventListener("click", logout);
-$("q").addEventListener("input", renderTable);
-$("status-filter").addEventListener("change", renderTable);
-$("grant-toggle").addEventListener("click", () => $("grant").classList.toggle("hidden"));
-$("grant-cancel").addEventListener("click", () => hide($("grant")));
-$("grant-save").addEventListener("click", liberarAcesso);
-$("table-area").addEventListener("click", (e) => {
-  const btn = e.target.closest("button[data-act]");
-  if (!btn) return;
-  const id = btn.dataset.id;
-  if (btn.dataset.act === "pay") setStatus(id, "paid");
-  else if (btn.dataset.act === "pend") setStatus(id, "pending");
-  else if (btn.dataset.act === "del") delCompra(id);
+document.querySelectorAll('.chip').forEach(c => {
+  c.addEventListener('click', () => {
+    document.querySelectorAll('.chip').forEach(x => x.classList.remove('is-active'));
+    c.classList.add('is-active');
+  });
 });
 
-checkSession();
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!reduce){
+  const heroImg = document.querySelector('.hero__media img');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (heroImg && y < window.innerHeight * 1.2){
+      heroImg.style.transform = `translate3d(0, ${y * 0.18}px, 0) scale(${1.05 + Math.min(y/4000, 0.13)})`;
+    }
+  }, { passive:true });
+}
 </script>
 </body>
 </html>
