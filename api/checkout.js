@@ -61,7 +61,8 @@ module.exports = async (req, res) => {
     },
     auto_return: "approved",
     // Avisa nosso webhook quando o pagamento muda de status (ex.: Pix aprovado).
-    notification_url: `${base}/api/webhook`,
+    // Barra no final é necessária por causa do trailingSlash do site (evita o 308).
+    notification_url: `${base}/api/webhook/`,
   };
 
   try {
