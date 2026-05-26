@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A1218">
+<meta name="robots" content="noindex, nofollow">
+<title>Obrigado · Sua Própria Trilha</title>
+<link rel="icon" type="image/png" href="/assets/inline/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Manrope:wght@300;500&family=Caveat&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          background: 'oklch(0.18 0.018 230)',
+          foreground: 'oklch(0.92 0.022 85)',
+          amber:      'oklch(0.82 0.13 78)',
+        },
+        fontFamily: {
+          display: ['Fraunces', 'serif'],
+          body: ['Manrope', 'sans-serif'],
+        },
+        letterSpacing: { mark: '0.2em' },
+      },
+    },
+  };
+</script>
+<style>
+  body { background: oklch(0.18 0.018 230); color: oklch(0.92 0.022 85); font-family: 'Manrope', sans-serif; }
+</style>
+</head>
+<body class="min-h-screen flex items-center justify-center px-6">
+  <main class="max-w-xl text-center">
+    <p class="text-[10px] tracking-mark text-foreground/50 uppercase">Sua Própria Trilha</p>
+    <h1 class="mt-6 font-display text-4xl md:text-5xl text-amber leading-tight">
+      Pagamento recebido. Obrigado!
+    </h1>
+    <p class="mt-6 text-foreground/70 leading-relaxed">
+      Sua compra foi registrada com sucesso. Em instantes você receberá o acesso ao
+      seu e-book pelo e-mail informado na hora do pagamento. Se em alguns minutos nada
+      chegar, confira a caixa de spam ou fale com a gente.
+    </p>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+      <a href="/livros/"
+         class="inline-flex items-center gap-3 bg-amber text-background px-7 py-4 font-display text-sm tracking-mark uppercase transition-colors hover:opacity-90">
+        Ver outros livros →
+      </a>
+      <a href="mailto:contato@suapropriatrilha.com.br?subject=Acesso ao meu e-book"
+         class="inline-flex items-center gap-2 px-6 py-4 font-display text-sm tracking-mark uppercase transition-colors"
+         style="border:1px solid oklch(0.82 0.13 78 / 60%); color:var(--amber);">
+        Falar com o suporte
+      </a>
+    </div>
+  </main>
+</body>
+</html>

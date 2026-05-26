@@ -66,6 +66,24 @@ def main():
         (out_dir / "index.html").write_text(html_livro, encoding="utf-8")
         print(f"  ✓ {out_dir.relative_to(ROOT)}/index.html  ·  {book['title']}")
 
+    # === api/_books.json (dados que a função de checkout usa) ===
+    import re
+    api_books = {}
+    for book in books:
+        raw = str(book.get("price", ""))
+        m = re.search(r"(\d+(?:[.,]\d{1,2})?)", raw.replace(".", "").replace(",", "."))
+        price = float(m.group(1)) if m else None
+        api_books[book["slug"]] = {
+            "title": book["title"],
+            "price": price,
+        }
+    api_dir = ROOT / "api"
+    api_dir.mkdir(parents=True, exist_ok=True)
+    (api_dir / "_books.json").write_text(
+        json.dumps(api_books, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    print(f"  ✓ api/_books.json  ·  {len(api_books)} livros")
+
     print(f"\nBuild concluído: 1 catálogo + {len(books)} páginas de livro")
 
 if __name__ == "__main__":

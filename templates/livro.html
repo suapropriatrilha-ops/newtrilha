@@ -52,18 +52,11 @@
             {% if book.installments %}<span class="text-xs tracking-mark text-foreground/60">{{ book.installments }}</span>{% endif %}
           </div>
           <div class="mt-6 flex flex-wrap items-center gap-4">
-            {# Botão de compra: usa link do Mercado Pago se configurado; senão, fallback p/ contato #}
-            {% if book.mp_link %}
-            <a href="{{ book.mp_link }}" target="_blank" rel="noopener"
+            {# Botão de compra: gera o checkout do Mercado Pago via função /api/checkout (preço e nome vêm do catálogo). #}
+            <a href="/api/checkout?slug={{ book.slug }}" rel="noopener"
                class="inline-flex items-center gap-3 bg-amber text-background px-7 py-4 font-display text-sm tracking-mark uppercase transition-colors hover:opacity-90">
               Comprar com Pix ou cartão →
             </a>
-            {% else %}
-            <a href="mailto:contato@{{ site.domain }}?subject=Compra: {{ book.title }}"
-               class="inline-flex items-center gap-3 bg-amber text-background px-7 py-4 font-display text-sm tracking-mark uppercase transition-colors hover:opacity-90">
-              Comprar agora →
-            </a>
-            {% endif %}
             {% if book.pdf_sample %}
             <a href="{{ book.pdf_sample }}" target="_blank" rel="noopener"
                class="inline-flex items-center gap-2 px-6 py-4 font-display text-sm tracking-mark uppercase transition-colors"
