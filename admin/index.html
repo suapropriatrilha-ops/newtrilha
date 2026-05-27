@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Admin · Sua Própria Trilha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0e120f; --panel:#161b16; --panel-2:#1d231d; --line:#2a322a;
+    --ink:#ece7da; --muted:#9aa295; --gold:#e9b44c; --gold-ink:#1a1407;
+    --ok-bg:#1d2a1d; --ok-ink:#9cd29c; --warn-bg:#2c2614; --warn-ink:#e3c469;
+    --danger:#d98a7a; --radius:12px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Manrope",system-ui,sans-serif;font-size:15px;line-height:1.55}
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:500;margin:0;letter-spacing:-.01em}
+  a{color:var(--gold)}
+  .hidden{display:none!important}
+  .wrap{max-width:1080px;margin:0 auto;padding:32px 28px 80px}
+
+  /* login */
+  .login{min-height:100vh;display:grid;place-items:center;padding:24px}
+  .login-card{width:100%;max-width:380px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:36px 32px}
+  .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .login-card h1{font-size:27px;margin:6px 0 26px}
+
+  /* header */
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:12px}
+  .top .brand{font-family:"Fraunces",serif;font-size:22px}
+  .top .brand span{color:var(--muted);font-size:13px;font-family:"Manrope";letter-spacing:.14em;text-transform:uppercase;margin-left:8px}
+
+  /* metrics */
+  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:26px}
+  .metric{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+  .metric .label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .metric .value{font-family:"Fraunces",serif;font-size:28px;margin-top:8px;font-variant-numeric:tabular-nums}
+
+  /* card / table */
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .card h2{font-size:19px;margin-bottom:16px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{text-align:left;font-weight:500;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:0 12px 12px;border-bottom:1px solid var(--line)}
+  td{padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+  tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:var(--panel-2)}
+  .mono{font-variant-numeric:tabular-nums}
+  .muted{color:var(--muted)}
+
+  .badge{display:inline-block;padding:3px 11px;border-radius:999px;font-size:12px;font-weight:500}
+  .badge.ok{background:var(--ok-bg);color:var(--ok-ink)}
+  .badge.warn{background:var(--warn-bg);color:var(--warn-ink)}
+
+  /* controls */
+  .toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
+  .spacer{flex:1}
+  input,select{font:inherit;font-size:14px;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:10px 12px}
+  input:focus,select:focus{outline:none;border-color:var(--gold)}
+  .field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+  .field label{font-size:13px;font-weight:500}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .row>.field{flex:1;min-width:150px}
+  .row>.field input,.row>.field select{width:100%}
+
+  .btn{border:none;cursor:pointer;font:inherit;font-weight:600;font-size:14px;padding:10px 18px;border-radius:9px;transition:opacity .15s,background .15s}
+  .btn.gold{background:var(--gold);color:var(--gold-ink)}
+  .btn.gold:hover{opacity:.9}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--muted)}
+  .btn.small{padding:6px 12px;font-size:13px;font-weight:500}
+  .btn.danger{background:transparent;color:var(--danger);border:1px solid #3a2622}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+
+  .alert{background:#2c1b18;color:var(--danger);padding:10px 14px;border-radius:9px;font-size:13px;margin-bottom:16px}
+  .empty{text-align:center;color:var(--muted);padding:44px 20px}
+  .acts{text-align:right;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<div id="login" class="login">
+  <div class="login-card">
+    <div class="eyebrow">Sua Própria Trilha</div>
+    <h1>Painel</h1>
+    <div id="login-error" class="alert hidden"></div>
+    <div class="field">
+      <label for="email">E-mail</label>
+      <input id="email" type="email" autocomplete="username" />
+    </div>
+    <div class="field">
+      <label for="password">Senha</label>
+      <input id="password" type="password" autocomplete="current-password" />
+    </div>
+    <button id="login-btn" class="btn gold" style="width:100%">Entrar</button>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="app" class="wrap hidden">
+  <div class="top">
+    <div class="brand">Sua Própria Trilha<span>Admin</span></div>
+    <button id="logout-btn" class="btn ghost small">Sair</button>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><div class="label">Receita</div><div id="m-receita" class="value">—</div></div>
+    <div class="metric"><div class="label">Vendas pagas</div><div id="m-pagas" class="value">—</div></div>
+    <div class="metric"><div class="label">Pendentes</div><div id="m-pendentes" class="value">—</div></div>
+    <div class="metric"><div class="label">Total</div><div id="m-total" class="value">—</div></div>
+  </div>
+
+  <div class="toolbar">
+    <input id="q" type="text" placeholder="Buscar por e-mail…" style="min-width:240px" />
+    <select id="status-filter">
+      <option value="all">Todos os status</option>
+      <option value="paid">Pagas</option>
+      <option value="pending">Pendentes</option>
+    </select>
+    <div class="spacer"></div>
+    <button id="grant-toggle" class="btn gold">+ Liberar acesso manual</button>
+  </div>
+
+  <div id="grant" class="card hidden" style="margin-bottom:20px">
+    <h2>Liberar acesso manual</h2>
+    <p class="muted" style="margin-top:-8px;margin-bottom:16px">Cria uma compra marcada como paga — para cortesias ou pagamentos que travaram.</p>
+    <div id="grant-error" class="alert hidden"></div>
+    <div class="row">
+      <div class="field"><label>E-mail do cliente</label><input id="g-email" type="email" /></div>
+      <div class="field"><label>Livro</label><select id="g-livro"><option value="">Selecione…</option></select></div>
+      <div class="field"><label>Valor (opcional)</label><input id="g-valor" type="number" step="0.01" min="0" placeholder="0,00" /></div>
+    </div>
+    <div class="row" style="margin-top:4px">
+      <button id="grant-save" class="btn gold" style="flex:none">Liberar acesso</button>
+      <button id="grant-cancel" class="btn ghost" style="flex:none">Cancelar</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Compras</h2>
+    <div id="table-area"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ===================== CONFIGURAÇÃO ===================== */
+/* A URL já é a sua. A ANON KEY é pública (pode ficar aqui no arquivo).
+   Pegue em: Supabase > Project Settings > API > Project API keys > "anon public". */
+const SUPABASE_URL = "https://zrfpkavzhjxqdbfndlkr.supabase.co";
+const SUPABASE_ANON_KEY = "COLE_AQUI_SUA_ANON_KEY";
+/* ======================================================= */
+
+const PAGOS = ["paid","approved","pago","aprovado","completed"];
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const $ = (id) => document.getElementById(id);
+const brl = (v) => new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(v)||0);
+const dataBR = (iso) => iso ? new Date(iso).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}) : "—";
+
+let COMPRAS = [];
+let LIVROS = [];
+
+function showError(el, msg){ el.textContent = msg; el.classList.remove("hidden"); }
+function hide(el){ el.classList.add("hidden"); }
+function show(el){ el.classList.remove("hidden"); }
+
+/* ---------- Auth ---------- */
+async function checkSession(){
+  const { data } = await sb.auth.getSession();
+  if (data.session) enterApp(); else { hide($("app")); show($("login")); }
+}
+
+async function login(){
+  hide($("login-error"));
+  const email = $("email").value.trim();
+  const password = $("password").value;
+  $("login-btn").disabled = true;
+  const { error } = await sb.auth.signInWithPassword({ email, password });
+  $("login-btn").disabled = false;
+  if (error){ showError($("login-error"), "E-mail ou senha incorretos."); return; }
+  enterApp();
+}
+
+async function logout(){ await sb.auth.signOut(); hide($("app")); show($("login")); }
+
+async function enterApp(){
+  hide($("login")); show($("app"));
+  await loadData();
+}
+
+/* ---------- Dados ---------- */
+async function loadData(){
+  const [{ data: compras }, { data: livros }] = await Promise.all([
+    sb.from("compras").select("id,email,livro_slug,payment_id,status,valor,metodo,criado_em").order("criado_em",{ascending:false}).limit(1000),
+    sb.from("livros").select("slug,titulo").order("titulo"),
+  ]);
+  COMPRAS = compras || [];
+  LIVROS = livros || [];
+  renderMetrics();
+  renderLivroOptions();
+  renderTable();
+}
+
+function renderMetrics(){
+  const pagas = COMPRAS.filter(c => PAGOS.includes(c.status));
+  const receita = pagas.reduce((s,c)=>s+(Number(c.valor)||0),0);
+  const pendentes = COMPRAS.filter(c => c.status === "pending").length;
+  $("m-receita").textContent = brl(receita);
+  $("m-pagas").textContent = pagas.length;
+  $("m-pendentes").textContent = pendentes;
+  $("m-total").textContent = COMPRAS.length;
+}
+
+function renderLivroOptions(){
+  const sel = $("g-livro");
+  sel.innerHTML = '<option value="">Selecione…</option>' +
+    LIVROS.map(l => `<option value="${l.slug}">${escapeHtml(l.titulo)}</option>`).join("");
+}
+
+function currentFilter(){
+  const q = $("q").value.trim().toLowerCase();
+  const sf = $("status-filter").value;
+  return COMPRAS.filter(c => {
+    const okQ = q ? (c.email||"").toLowerCase().includes(q) : true;
+    const okS = sf === "all" ? true : sf === "paid" ? PAGOS.includes(c.status) : c.status === "pending";
+    return okQ && okS;
+  });
+}
+
+function renderTable(){
+  const rows = currentFilter();
+  const area = $("table-area");
+  if (!rows.length){ area.innerHTML = '<div class="empty">Nenhuma compra encontrada.</div>'; return; }
+  area.innerHTML = `
+    <table>
+      <thead><tr>
+        <th>E-mail</th><th>Livro</th><th>Valor</th><th>Método</th><th>Status</th><th>Data</th><th class="acts">Ações</th>
+      </tr></thead>
+      <tbody>
+        ${rows.map(c => {
+          const pago = PAGOS.includes(c.status);
+          return `<tr>
+            <td>${escapeHtml(c.email||"")}</td>
+            <td class="muted">${escapeHtml(c.livro_slug||"")}</td>
+            <td class="mono">${brl(c.valor)}</td>
+            <td class="muted">${escapeHtml(c.metodo||"—")}</td>
+            <td><span class="badge ${pago?"ok":"warn"}">${escapeHtml(c.status)}</span></td>
+            <td class="muted mono">${dataBR(c.criado_em)}</td>
+            <td class="acts">
+              <button class="btn ghost small" data-act="${pago?"pend":"pay"}" data-id="${c.id}">${pago?"Tornar pendente":"Marcar paga"}</button>
+              <button class="btn danger small" data-act="del" data-id="${c.id}">Excluir</button>
+            </td>
+          </tr>`;
+        }).join("")}
+      </tbody>
+    </table>`;
+}
+
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m])); }
+
+/* ---------- Ações ---------- */
+async function setStatus(id, status){
+  await sb.from("compras").update({ status }).eq("id", id);
+  await loadData();
+}
+async function delCompra(id){
+  if (!confirm("Excluir esta compra?")) return;
+  await sb.from("compras").delete().eq("id", id);
+  await loadData();
+}
+async function liberarAcesso(){
+  hide($("grant-error"));
+  const email = $("g-email").value.trim().toLowerCase();
+  const slug = $("g-livro").value;
+  const valor = parseFloat($("g-valor").value) || 0;
+  if (!email || !slug){ showError($("grant-error"), "Informe o e-mail e selecione o livro."); return; }
+  $("grant-save").disabled = true;
+  const { error } = await sb.from("compras").insert({ email, livro_slug: slug, status:"paid", metodo:"manual", valor });
+  $("grant-save").disabled = false;
+  if (error){ showError($("grant-error"), error.message); return; }
+  $("g-email").value=""; $("g-livro").value=""; $("g-valor").value="";
+  hide($("grant"));
+  await loadData();
+}
+
+/* ---------- Eventos ---------- */
+$("login-btn").addEventListener("click", login);
+$("password").addEventListener("keydown", e => { if(e.key==="Enter") login(); });
+$("logout-btn").addEventListener("click", logout);
+$("q").addEventListener("input", renderTable);
+$("status-filter").addEventListener("change", renderTable);
+$("grant-toggle").addEventListener("click", () => $("grant").classList.toggle("hidden"));
+$("grant-cancel").addEventListener("click", () => hide($("grant")));
+$("grant-save").addEventListener("click", liberarAcesso);
+$("table-area").addEventListener("click", (e) => {
+  const btn = e.target.closest("button[data-act]");
+  if (!btn) return;
+  const id = btn.dataset.id;
+  if (btn.dataset.act === "pay") setStatus(id, "paid");
+  else if (btn.dataset.act === "pend") setStatus(id, "pending");
+  else if (btn.dataset.act === "del") delCompra(id);
+});
+
+checkSession();
+</script>
+</body>
+</html>
